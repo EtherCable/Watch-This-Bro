@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
 	public float speed = 10.0f;
 	public float scrambleSpeed = 5.0f;
-	public float jumpSpeed = 200.0f;
+	public float jumpSpeedHeight = 200.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,23 +34,23 @@ public class PlayerController : MonoBehaviour
 		movementJump = jumpValue.Get<float>();
 	}
 
-    void FixedUpdate()
-    {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+	void FixedUpdate()
+	{
+		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
 		RaycastHit hit;
 
+		// Apply movement force regardless of whether player is on the ground or in the air
+		rb.AddForce(movement * speed);
 
 		if (Physics.Raycast(transform.position, Vector3.down, 1.1f))
 		{
-			rb.AddForce(movement * speed);
-			rb.AddForce(Vector3.up * movementJump * jumpSpeed);
+			rb.AddForce(Vector3.up * movementJump * jumpSpeedHeight);
 		}
 		else if (Physics.SphereCast(transform.position + Vector3.down*0.25f, 0.5f, Vector3.down, out hit, 0.5f))
 		{
-			rb.AddForce(movement * scrambleSpeed);
 			rb.AddForce(Vector3.up * (Physics.gravity.magnitude*0.8f + scrambleSpeed*movementJump));
 		}
 		movementJump = 0;
-    }
+	}
 }
