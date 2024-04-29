@@ -36,6 +36,16 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		// Assuming 'platform' is your moving platform object
+		if(transform.parent != null && transform.parent.gameObject.tag == "MovingPlatform")
+		{
+			transform.position = new Vector3(
+        		transform.parent.position.x + relativePosition.x,
+        		transform.position.y, // Keep the current Y position of the player
+        		transform.parent.position.z + relativePosition.z
+    		);
+		}
+
 		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
 		RaycastHit hit;
@@ -52,5 +62,27 @@ public class PlayerController : MonoBehaviour
 			rb.AddForce(Vector3.up * (Physics.gravity.magnitude*0.8f + scrambleSpeed*movementJump));
 		}
 		movementJump = 0;
+	}
+
+	private Vector3 relativePosition;
+
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.gameObject.tag == "MovingPlatform")
+		{
+			// Make the platform the parent of the player
+			transform.parent = other.gameObject.transform;
+			// Calculate the player's position relative to the platform
+			relativePosition = transform.position - other.gameObject.transform.position;
+		}
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		if(other.gameObject.tag == "MovingPlatform")
+		{
+			// Remove the platform as the parent of the player
+			transform.parent = null;
+		}
 	}
 }
