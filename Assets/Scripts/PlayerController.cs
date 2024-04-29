@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,14 +14,11 @@ public class PlayerController : MonoBehaviour
 	public float speed = 10.0f;
 	public float scrambleSpeed = 5.0f;
 	public float jumpSpeedHeight = 200.0f;
-	private int score = 0;
-	public TextMeshProUGUI scoreText;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-		UpdateScore();
     }
 
 	void OnMove(InputValue movementValue)
@@ -79,14 +75,6 @@ public class PlayerController : MonoBehaviour
 			// Calculate the player's position relative to the platform
 			relativePosition = transform.position - other.gameObject.transform.position;
 		}
-
-		if (other.gameObject.tag == "StreetCred")
-		{
-			// make coin disappear
-			other.gameObject.SetActive(false);
-			score++;
-			UpdateScore();
-		}
 	}
 
 	void OnTriggerExit(Collider other)
@@ -96,10 +84,5 @@ public class PlayerController : MonoBehaviour
 			// Remove the platform as the parent of the player
 			transform.parent = null;
 		}
-	}
-
-	void UpdateScore()
-	{
-		scoreText.text = "Creds: " + score.ToString();
 	}
 }
