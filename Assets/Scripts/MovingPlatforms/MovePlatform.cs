@@ -5,8 +5,8 @@ using UnityEngine;
 public class MovePlatform : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float Offset = 0;
-    public float speed = 0;
+    public float Offset = 3;
+    public float speed = 2;
 
     private float leftLimit;
     private float rightLimit;
