@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ad57582ce48ab6948affafd6257cc007, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.7071444, g: 0.77382594, b: 0.8840184, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -226,11 +226,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &318824956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+  m_PrefabInstance: {fileID: 1409355436466378854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &318824963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1789488742334380755, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
   m_PrefabInstance: {fileID: 1409355436466378854}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &318824964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318824956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092e9268c090280489643b5570e9ddc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 0.5
 --- !u!1 &1854104653
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +457,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 794194411669948429, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d1eca66403c9f24085fe67f981c6380, type: 2}
     - target: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: m_Name
       value: Player
@@ -513,7 +535,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1789488742334380755, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1854104656}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 318824964}
   m_SourcePrefab: {fileID: 100100000, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
 --- !u!1001 &2309424115562329876
 PrefabInstance:
