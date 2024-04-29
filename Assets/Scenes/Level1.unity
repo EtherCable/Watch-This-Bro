@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3317997427657669455, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_Name
-      value: Platform (1)
+      value: StartingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 8500199790410025849, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_IsKinematic
@@ -291,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3317997427657669455, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_Name
-      value: Platform (2)
+      value: OppositeMovingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 3317997427657669455, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_TagString
@@ -726,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3317997427657669455, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: MovingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 3317997427657669455, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_TagString
