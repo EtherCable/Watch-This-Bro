@@ -43,14 +43,14 @@ public class PlayerController : MonoBehaviour
 	void FixedUpdate()
 	{
 		// Assuming 'platform' is your moving platform object
-		if(transform.parent != null && transform.parent.gameObject.tag == "MovingPlatform")
+		/*if(transform.parent != null && transform.parent.gameObject.tag == "MovingPlatform")
 		{
 			transform.position = new Vector3(
         		transform.parent.position.x + relativePosition.x,
         		transform.position.y, // Keep the current Y position of the player
         		transform.parent.position.z + relativePosition.z
     		);
-		}
+		}*/
 
 		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
@@ -102,6 +102,13 @@ public class PlayerController : MonoBehaviour
 		{
 			// if you hit respawn barrier, spawn at last cp
 			transform.position = spawnPoint;
+		}
+	}
+	void OnCollisionEnter(Collision other)
+	{
+		if (other.gameObject.tag == "MovingPlatform")
+		{
+			transform.parent = other.gameObject.transform;
 		}
 	}
 
