@@ -147,14 +147,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 0.5
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!21 &1020173399
 Material:
   serializedVersion: 8
-=======
---- !u!1 &427390281
-GameObject:
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
 =======
 --- !u!1 &427390281
 GameObject:
@@ -163,7 +158,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 <<<<<<< HEAD
   m_Name: Unlit/Color
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -242,8 +236,6 @@ GameObject:
 --- !u!43 &1793725040
 Mesh:
 =======
-=======
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
   serializedVersion: 6
   m_Component:
   - component: {fileID: 427390285}
@@ -259,15 +251,11 @@ Mesh:
   m_IsActive: 1
 --- !u!114 &427390282
 MonoBehaviour:
-<<<<<<< HEAD
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
-=======
 >>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 <<<<<<< HEAD
   m_Name: 
   serializedVersion: 11
@@ -429,8 +417,6 @@ MonoBehaviour:
     size: 0
     path: 
 =======
-=======
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
   m_GameObject: {fileID: 427390281}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -806,9 +792,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
-=======
 >>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
 --- !u!1 &1854104653
 GameObject:
@@ -916,7 +899,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 318824963}
-<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1 &2100619861
 GameObject:
@@ -1061,8 +1043,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flag: {fileID: 2100619861}
 =======
-=======
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
 --- !u!1001 &2007405625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1187,9 +1167,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8032313786187367058, guid: aa32585c703241e49b71db8c08ac7446, type: 3}
   m_PrefabInstance: {fileID: 2110440132}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
-=======
 >>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
 --- !u!1 &2147371221
 GameObject:
@@ -1561,13 +1538,7 @@ SceneRoots:
   - {fileID: 2226250375677236674}
   - {fileID: 1409355436466378854}
 <<<<<<< HEAD
-<<<<<<< HEAD
   - {fileID: 2100619866}
-=======
-  - {fileID: 1022797445}
-  - {fileID: 427390285}
-  - {fileID: 1513960814}
->>>>>>> 20708853e9ce7d7d0599ac713784b3cb91235ca1
 =======
   - {fileID: 1022797445}
   - {fileID: 427390285}
