@@ -501,7 +501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: jumpSpeedHeight
-      value: 300
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 4067647275077019846, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: m_Constraints
@@ -577,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8952988756120278994, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8952988756120278994, guid: af4cafbccdc6222439813a9a5aca0a21, type: 3}
       propertyPath: m_LocalRotation.w
