@@ -17,12 +17,14 @@ public class PlayerController : MonoBehaviour
 	public float jumpSpeedHeight = 200.0f;
 	private int score = 0;
 	public TextMeshProUGUI scoreText;
+	private Vector3 spawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 		UpdateScore();
+		spawnPoint = transform.position;
     }
 
 	void OnMove(InputValue movementValue)
@@ -84,8 +86,22 @@ public class PlayerController : MonoBehaviour
 		{
 			// make coin disappear
 			other.gameObject.SetActive(false);
+			// update score and show in UI
 			score++;
 			UpdateScore();
+		}
+
+		if (other.gameObject.tag == "Checkpoint")
+		{
+			// set new spawn to cp and then remove cp cone
+			spawnPoint = other.transform.position;
+			other.gameObject.SetActive(false);
+		}
+
+		if (other.gameObject.tag == "RespawnBarrier")
+		{
+			// if you hit respawn barrier, spawn at last cp
+			transform.position = spawnPoint;
 		}
 	}
 
@@ -102,4 +118,5 @@ public class PlayerController : MonoBehaviour
 	{
 		scoreText.text = "Creds: " + score.ToString();
 	}
+	
 }
