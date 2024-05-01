@@ -7,6 +7,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
 	private Rigidbody rb;
+	public GameObject LevelCompleteTextObject;
 
 	private float movementX;
 	private float movementY;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 		UpdateScore();
 		spawnPoint = transform.position;
+		LevelCompleteTextObject.SetActive(false);
     }
 
 	void OnMove(InputValue movementValue)
@@ -109,6 +111,10 @@ public class PlayerController : MonoBehaviour
 		if (other.gameObject.tag == "MovingPlatform")
 		{
 			transform.parent = other.gameObject.transform;
+		}
+		if (other.gameObject.tag == "FinalPlatform")
+		{
+			LevelCompleteTextObject.SetActive(true);
 		}
 	}
 

@@ -8,6 +8,7 @@ TagManager:
   - StreetCred
   - MovingPlatform
   - Checkpoint
+  - FinalPlatform
   layers:
   - Default
   - TransparentFX
