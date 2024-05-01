@@ -48,6 +48,7 @@ ExportedObj/
 *.VC.db
 .vsconfig
 .vscode
+/Build-WebGL/
 
 # Unity3D generated meta files
 *.pidb.meta
