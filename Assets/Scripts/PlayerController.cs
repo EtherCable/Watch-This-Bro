@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
 	void OnMove(InputValue movementValue)
 	{
 		Vector2 movementVector = movementValue.Get<Vector2>();
-
 		movementX = movementVector.x;
 		movementY = movementVector.y;
 	}
@@ -42,35 +41,27 @@ public class PlayerController : MonoBehaviour
 		movementJump = jumpValue.Get<float>();
 	}
 
-	void FixedUpdate()
-	{
-		// Assuming 'platform' is your moving platform object
-		/*if(transform.parent != null && transform.parent.gameObject.tag == "MovingPlatform")
-		{
-			transform.position = new Vector3(
-        		transform.parent.position.x + relativePosition.x,
-        		transform.position.y, // Keep the current Y position of the player
-        		transform.parent.position.z + relativePosition.z
-    		);
-		}*/
-
-		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
-		RaycastHit hit;
-
-		// Apply movement force regardless of whether player is on the ground or in the air
-		rb.AddForce(movement * speed);
-
-		if (Physics.Raycast(transform.position, Vector3.down, 1.1f))
-		{
-			rb.AddForce(Vector3.up * movementJump * jumpSpeedHeight);
-		}
-		else if (Physics.SphereCast(transform.position + Vector3.down*0.25f, 0.5f, Vector3.down, out hit, 0.5f))
-		{
-			rb.AddForce(Vector3.up * (Physics.gravity.magnitude*0.8f + scrambleSpeed*movementJump));
-		}
-		movementJump = 0;
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
+        {
+            Vector3 jump = new Vector3(0.0f, 10, 0.0f);
+            rb.AddForce(jump, ForceMode.Impulse);
+        }
 	}
+
+    void FixedUpdate()
+    {
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        rb.AddForce(movement * speed);
+
+        // Max speed a player can reach
+        float maxSpeed = 8f;
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
+    }
+
 
 	private Vector3 relativePosition;
 
