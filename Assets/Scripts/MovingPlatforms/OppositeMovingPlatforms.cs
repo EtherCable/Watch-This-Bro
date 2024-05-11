@@ -4,42 +4,50 @@ using UnityEngine;
 
 public class OppositeMovingPlatforms : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float Offset = 3;
     public float speed = 2;
+    public float pauseTime = 2; // Time to pause in seconds
 
     private float leftLimit;
     private float rightLimit;
     private Rigidbody rb;
-    private bool changed;
-	private float move = 0.0f;
+    private bool movingRight;
 
     void Start()
     {
         leftLimit = transform.position.x - Offset;
         rightLimit = transform.position.x + Offset;
         rb = GetComponent<Rigidbody>();
-        // Move the platform left
-		move = -speed;
-        changed = true;
+        movingRight = false; // Start by moving left
     }
 
     void FixedUpdate()
     {
-		rb.MovePosition(transform.position + Vector3.right * move * Time.deltaTime);
-
-        // Once the left platform reaches left limit, reverse direction
-        if (transform.position.x < leftLimit && changed)
+        if (movingRight)
         {
-			move = -move;
-            changed = !changed;
+            rb.MovePosition(transform.position + Vector3.right * speed * Time.deltaTime);
+            if (transform.position.x > rightLimit)
+            {
+                StartCoroutine(PauseBeforeMoving());
+                movingRight = false;
+            }
         }
-
-        // Once the right platform reaches right limit, reverse direction
-        if (transform.position.x > rightLimit && !changed)
+        else
         {
-			move = -move;
-            changed = !changed;
+            rb.MovePosition(transform.position - Vector3.right * speed * Time.deltaTime);
+            if (transform.position.x < leftLimit)
+            {
+                StartCoroutine(PauseBeforeMoving());
+                movingRight = true;
+            }
         }
+    }
+
+    IEnumerator PauseBeforeMoving()
+    {
+        float currentSpeed = speed;
+        speed = 0; // Stop the platform
+        yield return new WaitForSeconds(pauseTime); // Wait for pauseTime seconds
+        speed = currentSpeed; // Resume movement
     }
 }

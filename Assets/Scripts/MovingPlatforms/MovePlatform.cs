@@ -4,44 +4,50 @@ using UnityEngine;
 
 public class MovePlatform : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float Offset = 3;
     public float speed = 2;
+    public float pauseTime = 2; // Time to pause in seconds
 
     private float leftLimit;
     private float rightLimit;
     private Rigidbody rb;
-    private bool changed;
-	private float move = 0.0f;
+    private bool movingRight;
 
     void Start()
     {
         leftLimit = transform.position.x - Offset;
         rightLimit = transform.position.x + Offset;
         rb = GetComponent<Rigidbody>();
-        //rb.velocity = new Vector3(speed, 0, 0);
-		move = speed;
-        changed = true;
+        movingRight = true;
     }
 
     void FixedUpdate()
     {
-		//transform.Translate(Vector3.right * move * Time.deltaTime);
-		rb.MovePosition(transform.position + Vector3.right*move*Time.deltaTime);
-
-        if (transform.position.x > rightLimit && changed)
+        if (movingRight)
         {
-            //rb.velocity = new Vector3(rb.velocity.x * -1, rb.velocity.y, rb.velocity.z);
-			move = -move;
-            changed = !changed;
+            rb.MovePosition(transform.position + Vector3.right * speed * Time.deltaTime);
+            if (transform.position.x > rightLimit)
+            {
+                StartCoroutine(PauseBeforeMoving());
+                movingRight = false;
+            }
         }
-        
-        if (transform.position.x < leftLimit && !changed)
+        else
         {
-            //rb.velocity = new Vector3(rb.velocity.x * -1, rb.velocity.y, rb.velocity.z);
-			move = -move;
-            changed = !changed;
+            rb.MovePosition(transform.position - Vector3.right * speed * Time.deltaTime);
+            if (transform.position.x < leftLimit)
+            {
+                StartCoroutine(PauseBeforeMoving());
+                movingRight = true;
+            }
         }
+    }
 
+    IEnumerator PauseBeforeMoving()
+    {
+        float currentSpeed = speed;
+        speed = 0; // Stop the platform
+        yield return new WaitForSeconds(pauseTime); // Wait for pauseTime seconds
+        speed = currentSpeed; // Resume movement
     }
 }
