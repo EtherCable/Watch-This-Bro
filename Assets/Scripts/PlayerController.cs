@@ -11,11 +11,9 @@ public class PlayerController : MonoBehaviour
 
 	private float movementX;
 	private float movementY;
-	private float movementJump = 0;
 
 	public float speed = 10.0f;
-	public float scrambleSpeed = 5.0f;
-	public float jumpSpeedHeight = 200.0f;
+	public float jumpForce = 8;
 	private int score = 0;
 	public TextMeshProUGUI scoreText;
 	private Vector3 spawnPoint;
@@ -36,32 +34,29 @@ public class PlayerController : MonoBehaviour
 		movementY = movementVector.y;
 	}
 
-	void OnJump(InputValue jumpValue)
-	{
-		movementJump = jumpValue.Get<float>();
-	}
 
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
         {
-            Vector3 jump = new Vector3(0.0f, 10, 0.0f);
+            Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
             rb.AddForce(jump, ForceMode.Impulse);
         }
 	}
 
-    void FixedUpdate()
-    {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
+	void FixedUpdate()
+	{
+		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+		rb.AddForce(movement * speed);
 
-        // Max speed a player can reach
-        float maxSpeed = 8f;
-        if (rb.velocity.magnitude > maxSpeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
-    }
-
+		// Max horizontal speed a player can reach
+		float maxSpeed = 5f;
+		Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+		if (horizontalVelocity.magnitude > maxSpeed)
+		{
+			horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
+			rb.velocity = new Vector3(horizontalVelocity.x, rb.velocity.y, horizontalVelocity.z);
+		}
+	}
 
 	private Vector3 relativePosition;
 
