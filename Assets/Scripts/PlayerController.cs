@@ -94,18 +94,25 @@ public class PlayerController : MonoBehaviour
 			transform.position = spawnPoint;
 		}
 	}
+	
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "MovingPlatform")
+		if (other.gameObject.tag == "Spike")
+		{
+			// Assuming spawnPoint is accessible and correctly set
+			transform.position = spawnPoint;
+		}
+		else if (other.gameObject.tag == "MovingPlatform")
 		{
 			transform.parent = other.gameObject.transform;
 		}
-		if (other.gameObject.tag == "FinalPlatform")
+		else if (other.gameObject.tag == "FinalPlatform")
 		{
 			LevelCompleteTextObject.SetActive(true);
-            rainbowText.StarColorChange();
+			rainbowText.StarColorChange();
 		}
 	}
+
 
 
 	void OnTriggerExit(Collider other)

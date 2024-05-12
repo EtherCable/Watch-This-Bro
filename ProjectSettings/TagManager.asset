@@ -9,6 +9,7 @@ TagManager:
   - MovingPlatform
   - Checkpoint
   - FinalPlatform
+  - Spike
   layers:
   - Default
   - TransparentFX
