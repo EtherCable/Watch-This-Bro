@@ -36,9 +36,23 @@ public class PlayerController : MonoBehaviour
 	void OnMove(InputValue movementValue)
 	{
 		Vector2 movementVector = movementValue.Get<Vector2>();
-		movementX = movementVector.x;
-		movementY = movementVector.y;
+
+		// Get the CameraPositionController from the camera object
+		CameraPositionController cameraController = Camera.main.GetComponent<CameraPositionController>();
+
+		// If the camera is rotated, reverse the inputs
+		if (cameraController.isRotated)
+		{
+			movementX = -movementVector.x;
+			movementY = -movementVector.y;
+		}
+		else
+		{
+			movementX = movementVector.x;
+			movementY = movementVector.y;
+		}
 	}
+
 
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
