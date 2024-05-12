@@ -237,6 +237,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1472161333}
     m_Modifications:
+    - target: {fileID: 3927285246406495928, guid: 8af99ee0d2412224abfa8e5aace8643e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1162c3002ead88045abc8b997ee74dea, type: 2}
     - target: {fileID: 6972776199085616154, guid: 8af99ee0d2412224abfa8e5aace8643e, type: 3}
       propertyPath: m_Name
       value: MovingPlatform (1)
@@ -1098,8 +1102,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1174,6 +1178,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1472161333}
     m_Modifications:
+    - target: {fileID: 3927285246406495928, guid: 8af99ee0d2412224abfa8e5aace8643e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1162c3002ead88045abc8b997ee74dea, type: 2}
     - target: {fileID: 6972776199085616154, guid: 8af99ee0d2412224abfa8e5aace8643e, type: 3}
       propertyPath: m_Name
       value: MovingPlatform (2)
@@ -1487,6 +1495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OppositeMovingPlatform (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5575135904684926463, guid: 8a37add126d91ee4681b11b353fa79cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bed3320d433f7c34eaffaeed80b47f2b, type: 2}
     - target: {fileID: 6503807135647785878, guid: 8a37add126d91ee4681b11b353fa79cb, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -1648,6 +1660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OppositeMovingPlatform (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5575135904684926463, guid: 8a37add126d91ee4681b11b353fa79cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1162c3002ead88045abc8b997ee74dea, type: 2}
     - target: {fileID: 6503807135647785878, guid: 8a37add126d91ee4681b11b353fa79cb, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -2765,6 +2781,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OppositeMovingPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 5575135904684926463, guid: 8a37add126d91ee4681b11b353fa79cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 34b03e7b2af81c240b3caa02fb25238b, type: 2}
     - target: {fileID: 6503807135647785878, guid: 8a37add126d91ee4681b11b353fa79cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0019713044
@@ -3055,6 +3075,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1472161333}
     m_Modifications:
+    - target: {fileID: 3927285246406495928, guid: 8af99ee0d2412224abfa8e5aace8643e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 34b03e7b2af81c240b3caa02fb25238b, type: 2}
     - target: {fileID: 6972776199085616154, guid: 8af99ee0d2412224abfa8e5aace8643e, type: 3}
       propertyPath: m_Name
       value: MovingPlatform

@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 	public TextMeshProUGUI scoreText;
 	private Vector3 spawnPoint;
 
+	public RainbowText rainbowText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,8 +103,10 @@ public class PlayerController : MonoBehaviour
 		if (other.gameObject.tag == "FinalPlatform")
 		{
 			LevelCompleteTextObject.SetActive(true);
+            rainbowText.StarColorChange();
 		}
 	}
+
 
 	void OnTriggerExit(Collider other)
 	{
