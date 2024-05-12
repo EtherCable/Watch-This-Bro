@@ -95,8 +95,11 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 	
+	
 	void OnCollisionEnter(Collision other)
 	{
+		Rigidbody playerRigidbody = GetComponent<Rigidbody>(); // Assuming the player has a Rigidbody component
+
 		if (other.gameObject.tag == "Spike")
 		{
 			// Assuming spawnPoint is accessible and correctly set
@@ -113,6 +116,18 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+
+	void OnCollisionStay(Collision other)
+	{
+		// Assuming the player has a Rigidbody component
+		Rigidbody playerRigidbody = GetComponent<Rigidbody>();
+
+		if (transform.position.y <= other.transform.position.y)
+		{
+			// Player is not on top of the platform, send him back to spawn
+			transform.position = spawnPoint;
+		}
+	}
 
 
 	void OnTriggerExit(Collider other)
