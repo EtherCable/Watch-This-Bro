@@ -3648,7 +3648,7 @@ GameObject:
   - component: {fileID: 1774349452}
   - component: {fileID: 1774349451}
   m_Layer: 5
-  m_Name: CredsCollected (1)
+  m_Name: POVtext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
