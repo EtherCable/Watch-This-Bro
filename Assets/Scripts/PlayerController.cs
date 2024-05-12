@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody rb;
 	public GameObject LevelCompleteTextObject;
 
+	public AudioClip coinAudio;
+	public AudioClip winAudio;
+	public AudioClip respawnAudio;
+	public AudioClip jumpAudio;
+	public AudioClip checkpointAudio;
+
 	private float movementX;
 	private float movementY;
 
@@ -18,6 +24,7 @@ public class PlayerController : MonoBehaviour
 	public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI timerText;
 	private Vector3 spawnPoint;
+	private AudioSource audioSource;
 
 	public RainbowText rainbowText;
 
@@ -31,6 +38,7 @@ public class PlayerController : MonoBehaviour
 		UpdateScore();
 		spawnPoint = transform.position;
 		LevelCompleteTextObject.SetActive(false);
+		audioSource = GetComponent<AudioSource>();
     }
 
 	void OnMove(InputValue movementValue)
@@ -59,6 +67,7 @@ public class PlayerController : MonoBehaviour
 		{
 			Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
 			rb.AddForce(jump, ForceMode.Impulse);
+			audioSource.PlayOneShot(jumpAudio, 1.0f);
 		}
 
 		if (timerIsActive) // Add this line
@@ -105,6 +114,7 @@ public class PlayerController : MonoBehaviour
 			// update score and show in UI
 			score++;
 			UpdateScore();
+			audioSource.PlayOneShot(coinAudio, 1.0f);
 		}
 
 		if (other.gameObject.tag == "Checkpoint")
@@ -112,12 +122,14 @@ public class PlayerController : MonoBehaviour
 			// set new spawn to cp and then remove cp cone
 			spawnPoint = other.transform.position;
 			other.gameObject.SetActive(false);
+			audioSource.PlayOneShot(checkpointAudio, 1.0f);
 		}
 
 		if (other.gameObject.tag == "RespawnBarrier")
 		{
 			// if you hit respawn barrier, spawn at last cp
 			transform.position = spawnPoint;
+			audioSource.PlayOneShot(respawnAudio, 1.0f);
 		}
 	}
 	
@@ -129,6 +141,7 @@ public class PlayerController : MonoBehaviour
 		if (other.gameObject.tag == "Spike")
 		{
 			transform.position = spawnPoint;
+			audioSource.PlayOneShot(respawnAudio, 1.0f);
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
@@ -139,6 +152,7 @@ public class PlayerController : MonoBehaviour
 			LevelCompleteTextObject.SetActive(true);
 			rainbowText.StarColorChange();
 			timerIsActive = false;
+			audioSource.PlayOneShot(winAudio, 1.0f);
 		}
 	}
 
