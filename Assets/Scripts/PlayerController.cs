@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
 	void UpdateScore()
 	{
-		scoreText.text = "Creds: " + score.ToString();
+		scoreText.text = "Credits: " + score.ToString();
 	}
 	
 }
