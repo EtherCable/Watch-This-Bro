@@ -5,11 +5,10 @@ using TMPro;
 public class RainbowText : MonoBehaviour
 {
     public float speed = 1.0f;
-    private TextMeshProUGUI text;
+    public TextMeshProUGUI text;
     private Color currentColor = Color.red;
     private void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
         StartCoroutine(ChangeColor());
     }
 
@@ -22,14 +21,23 @@ public class RainbowText : MonoBehaviour
     {
         while (true)
         {
-            for (float i = 0; i < 1; i += Time.deltaTime * speed)
+            if (text!= null) // Check if text is not null
             {
-                text.color = Color.Lerp(currentColor, GetNextColor(currentColor), i);
-                yield return null;
+                for (float i = 0; i < 1; i += Time.deltaTime * speed)
+                {
+                    text.color = Color.Lerp(currentColor, GetNextColor(currentColor), i);
+                    yield return null;
+                }
+                currentColor = GetNextColor(currentColor);
             }
-            currentColor = GetNextColor(currentColor);
+            else
+            {
+                Debug.LogError("TextMeshProUGUI component not found.");
+                yield break; // Exit the coroutine if text is null
+            }
         }
     }
+
 
     Color GetNextColor(Color currentColor)
     {

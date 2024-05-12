@@ -16,9 +16,13 @@ public class PlayerController : MonoBehaviour
 	public float jumpForce = 8;
 	private int score = 0;
 	public TextMeshProUGUI scoreText;
+	public TextMeshProUGUI timerText;
 	private Vector3 spawnPoint;
 
 	public RainbowText rainbowText;
+
+	private float timer = 0.0f;
+	private bool timerIsActive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -36,13 +40,21 @@ public class PlayerController : MonoBehaviour
 		movementY = movementVector.y;
 	}
 
-
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
-        {
-            Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
-            rb.AddForce(jump, ForceMode.Impulse);
-        }
+		{
+			Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
+			rb.AddForce(jump, ForceMode.Impulse);
+		}
+
+		if (timerIsActive) // Add this line
+		{
+			timer += Time.deltaTime;
+			int minutes = Mathf.FloorToInt(timer / 60F);
+			int seconds = Mathf.FloorToInt(timer - minutes * 60);
+			int milliseconds = Mathf.FloorToInt((timer - Mathf.Floor(timer)) * 1000);
+			timerText.text = string.Format("Time: {0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+		}
 	}
 
 	void FixedUpdate()
@@ -102,7 +114,6 @@ public class PlayerController : MonoBehaviour
 
 		if (other.gameObject.tag == "Spike")
 		{
-			// Assuming spawnPoint is accessible and correctly set
 			transform.position = spawnPoint;
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
@@ -113,6 +124,7 @@ public class PlayerController : MonoBehaviour
 		{
 			LevelCompleteTextObject.SetActive(true);
 			rainbowText.StarColorChange();
+			timerIsActive = false;
 		}
 	}
 
