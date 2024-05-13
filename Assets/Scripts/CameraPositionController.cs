@@ -15,6 +15,8 @@ public class CameraPositionController : MonoBehaviour
 
     public Transform player;
     public float camRotationSpeed = 500.0f;
+    public float camMin = -45.0f;
+    public float camMax = 50.0f;
     private Vector3 offset;
     private Quaternion originalRotation;
     private Quaternion newRotation = Quaternion.Euler(10, 180, 0);
@@ -25,6 +27,8 @@ public class CameraPositionController : MonoBehaviour
 
     [SerializeField] Transform CamPos;
     private Vector3 ThirdPersonPos;
+    private float pitch = 0.0f;
+    private float yaw = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -90,13 +94,14 @@ public class CameraPositionController : MonoBehaviour
                 break;
             
             case CamMode.CAM_FREE:
-                if(Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
-                {
-                    float verticalInput = Input.GetAxis("Mouse Y") * camRotationSpeed * Time.deltaTime;
-                    float horizontalInput = Input.GetAxis("Mouse X") * camRotationSpeed * Time.deltaTime;
-                    transform.Rotate(Vector3.right, -verticalInput);
-                    transform.Rotate(Vector3.up, horizontalInput, Space.World);
-                }
+                // if(Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
+                // {
+                    yaw += Input.GetAxis("Mouse X") * camRotationSpeed * Time.deltaTime;
+                    pitch += Input.GetAxis("Mouse Y") * camRotationSpeed * Time.deltaTime;
+                    pitch = Mathf.Clamp(pitch, camMin, camMax);
+                    transform.eulerAngles = new Vector3 (-pitch, yaw, 0.0f);
+                // }
+                
                 break;
             
              case CamMode.CAM_FIRSTPERSON:
