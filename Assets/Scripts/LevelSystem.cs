@@ -42,7 +42,9 @@ public class LevelSystem : MonoBehaviour
 
         olvl.SetActive(false);
         nlvl.SetActive(true);
-        this.player.transform.position = nlvl.GetComponent<Level>().StartPos.transform.position;
+        Vector3 sp = nlvl.GetComponent<Level>().StartPos.transform.position;
+        this.player.transform.position = sp;
+        this.player.GetComponent<PlayerController>().spawnPoint = sp;
 
 
         

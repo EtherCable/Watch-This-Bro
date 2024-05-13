@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 	private int score = 0;
 	public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI timerText;
-	private Vector3 spawnPoint;
+	public Vector3 spawnPoint;
 	private AudioSource audioSource;
 
 	public RainbowText rainbowText;
