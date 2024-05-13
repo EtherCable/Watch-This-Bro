@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
 	private int score = 0;
 	public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI timerText;
+	public TextMeshProUGUI livesText;
 	public Vector3 spawnPoint;
 	private AudioSource audioSource;
 
@@ -31,11 +33,14 @@ public class PlayerController : MonoBehaviour
 	private float timer = 0.0f;
 	private bool timerIsActive = true;
 
+	public int lives = 3;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 		UpdateScore();
+		UpdateLives();
 		spawnPoint = transform.position;
 		LevelCompleteTextObject.SetActive(false);
 		audioSource = GetComponent<AudioSource>();
@@ -46,7 +51,7 @@ public class PlayerController : MonoBehaviour
 		Vector2 movementVector = movementValue.Get<Vector2>();
 
 		// Get the CameraPositionController from the camera object
-		CameraPositionController cameraController = Camera.main.GetComponent<CameraPositionController>();
+		CameraPositionController cameraController = GameObject.Find("CamPivot").GetComponent<CameraPositionController>();
 
 		// If the camera is rotated, reverse the inputs
 		if (cameraController.isRotated)
@@ -77,6 +82,11 @@ public class PlayerController : MonoBehaviour
 			int seconds = Mathf.FloorToInt(timer - minutes * 60);
 			int milliseconds = Mathf.FloorToInt((timer - Mathf.Floor(timer)) * 1000);
 			timerText.text = string.Format("Time: {0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+		}
+
+		if (lives == 0)
+		{
+			Die();
 		}
 	}
 
@@ -130,6 +140,8 @@ public class PlayerController : MonoBehaviour
 			// if you hit respawn barrier, spawn at last cp
 			transform.position = spawnPoint;
 			audioSource.PlayOneShot(respawnAudio, 1.0f);
+			lives--;
+			UpdateLives();
 		}
 	}
 	
@@ -142,6 +154,8 @@ public class PlayerController : MonoBehaviour
 		{
 			transform.position = spawnPoint;
 			audioSource.PlayOneShot(respawnAudio, 1.0f);
+			lives--;
+			UpdateLives();
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
@@ -182,6 +196,17 @@ public class PlayerController : MonoBehaviour
 	void UpdateScore()
 	{
 		scoreText.text = "Credits: " + score.ToString();
+	}
+
+	void UpdateLives()
+	{
+		livesText.text = "Lives: " + lives.ToString();
+	}
+
+	void Die()
+	{
+		Scene scene = SceneManager.GetActiveScene();
+		SceneManager.LoadScene(scene.name);
 	}
 	
 }
