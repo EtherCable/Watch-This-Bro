@@ -8,6 +8,7 @@ public class LevelSystem : MonoBehaviour
     public int current_level = 0;
     public List<GameObject> levels;
     public GameObject player;
+	public AudioClip sound;
 
 
 
@@ -32,6 +33,7 @@ public class LevelSystem : MonoBehaviour
     {
         this.LoadLevel(this.current_level+1);
         this.current_level++;
+		player.GetComponent<AudioSource>().PlayOneShot(sound, 1.0f);
     }
 
     public void LoadLevel(int lvl = -1)

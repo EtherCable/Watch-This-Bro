@@ -21,3 +21,5 @@ ATTRIBUTIONS:
 "Cartoonish sound for throwing things" - copyc4t, opengameart.org
 
 "Completion sound." - Brandon Morris, opengameart.org
+
+"UI Sounds" - StumpyStrust, opengameart.org
