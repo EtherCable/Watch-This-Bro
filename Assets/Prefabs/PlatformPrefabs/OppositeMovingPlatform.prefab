@@ -170,3 +170,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Offset: 3
   speed: 2
+  pauseTime: 2
