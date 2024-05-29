@@ -2474,6 +2474,7 @@ MonoBehaviour:
   camMax: 50
   CamState: 0
   isRotated: 0
+  camInfo: {fileID: 0}
   CamPos: {fileID: 1854104656}
 --- !u!43 &459503105
 Mesh:
@@ -4858,7 +4859,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 1 Complete!
+  m_text: Tutorial Level Complete!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a87a11c03334494fb73c6623f228357, type: 2}
   m_sharedMaterial: {fileID: -1408318347381568140, guid: 5a87a11c03334494fb73c6623f228357, type: 2}
