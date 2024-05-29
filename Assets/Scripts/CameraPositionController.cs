@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CameraPositionController : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class CameraPositionController : MonoBehaviour
     public CamMode CamState = 0; // my enums hate me and my family, 0 = default 1 = free 2 = backwards
 
     public bool isRotated = false; // Add this line to store the rotation state
+
+    public TextMeshProUGUI camInfo;
 
     [SerializeField] Transform CamPos;
     private Vector3 ThirdPersonPos;
@@ -49,6 +52,7 @@ public class CameraPositionController : MonoBehaviour
             {
                 case CamMode.CAM_DEFAULT: // default
                     CamState = CamMode.CAM_FREE;
+                    camInfo.text = "Mode: Free";
                     Debug.Log("Changed CamState to CAM_FREE");
                     transform.position = player.transform.position + offset;
                     transform.rotation = originalRotation;
@@ -56,6 +60,7 @@ public class CameraPositionController : MonoBehaviour
                 
                 case CamMode.CAM_FREE: // free
                     CamState = CamMode.CAM_BACKWARDS;
+                    camInfo.text = "Mode: Challenge";
                     Debug.Log("Changed CamState to CAM_BACKWARDS");
                     transform.position = player.transform.position + newOffset; // Update position relative to player
                     transform.rotation = newRotation;
@@ -64,6 +69,7 @@ public class CameraPositionController : MonoBehaviour
                 
                 case CamMode.CAM_BACKWARDS: // backwards
                     CamState = CamMode.CAM_FIRSTPERSON;
+                    camInfo.text = "Mode: First Person";
                     isRotated = false;
                     transform.rotation = originalRotation;
                     CamPos.position = new Vector3(0,0,0);
@@ -72,6 +78,7 @@ public class CameraPositionController : MonoBehaviour
                 
                 case CamMode.CAM_FIRSTPERSON:
                     CamState = CamMode.CAM_DEFAULT;
+                    camInfo.text = "Mode: Third Person";
                     Debug.Log("Changed CamState to CAM_DEFAULT");
                     transform.position = player.transform.position + offset;
                     transform.rotation = originalRotation;
@@ -106,13 +113,17 @@ public class CameraPositionController : MonoBehaviour
             
              case CamMode.CAM_FIRSTPERSON:
                 CamPos.position = new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z + 1);
-                if(Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
-                {
-                    float verticalInput = Input.GetAxis("Mouse Y") * camRotationSpeed * Time.deltaTime;
-                    float horizontalInput = Input.GetAxis("Mouse X") * camRotationSpeed * Time.deltaTime;
-                    transform.transform.Rotate(Vector3.right, -verticalInput);
-                    transform.transform.Rotate(Vector3.up, horizontalInput, Space.World);
-                }
+                // if(Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
+                // {
+                //     float verticalInput = Input.GetAxis("Mouse Y") * camRotationSpeed * Time.deltaTime;
+                //     float horizontalInput = Input.GetAxis("Mouse X") * camRotationSpeed * Time.deltaTime;
+                //     transform.transform.Rotate(Vector3.right, -verticalInput);
+                //     transform.transform.Rotate(Vector3.up, horizontalInput, Space.World);
+                // }
+                yaw += Input.GetAxis("Mouse X") * camRotationSpeed * Time.deltaTime;
+                pitch += Input.GetAxis("Mouse Y") * camRotationSpeed * Time.deltaTime;
+                pitch = Mathf.Clamp(pitch, camMin, camMax);
+                transform.eulerAngles = new Vector3 (-pitch, yaw, 0.0f);
                 break;
         }
     }

@@ -3010,6 +3010,7 @@ MonoBehaviour:
   camMax: 50
   CamState: 0
   isRotated: 0
+  camInfo: {fileID: 1774349451}
   CamPos: {fileID: 1854104656}
 --- !u!43 &459503105
 Mesh:
