@@ -12,6 +12,7 @@ public class SpikeMovement : MonoBehaviour
     private float lowerLimit;
     private Rigidbody rb;
     private bool movingDown;
+    private float initialOffsetX; // Store the initial x offset from the parent
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class SpikeMovement : MonoBehaviour
         lowerLimit = transform.position.y - Offset;
         rb = GetComponent<Rigidbody>();
         movingDown = true;
+        initialOffsetX = transform.position.x - transform.parent.position.x; // Calculate the initial x offset from the parent
     }
 
     void FixedUpdate()
@@ -28,8 +30,8 @@ public class SpikeMovement : MonoBehaviour
 
         if (movingDown)
         {
-            // Move horizontally with the parent
-            transform.position = new Vector3(parentTransform.position.x, transform.position.y, transform.position.z);
+            // Move horizontally with the parent while maintaining the initial x offset
+            transform.position = new Vector3(parentTransform.position.x + initialOffsetX, transform.position.y, transform.position.z);
             
             // Move down
             rb.MovePosition(transform.position - Vector3.up * speed * Time.deltaTime);
@@ -42,8 +44,8 @@ public class SpikeMovement : MonoBehaviour
         }
         else
         {
-            // Move horizontally with the parent
-            transform.position = new Vector3(parentTransform.position.x, transform.position.y, transform.position.z);
+            // Move horizontally with the parent while maintaining the initial x offset
+            transform.position = new Vector3(parentTransform.position.x + initialOffsetX, transform.position.y, transform.position.z);
             
             // Move up
             rb.MovePosition(transform.position + Vector3.up * speed * Time.deltaTime);
