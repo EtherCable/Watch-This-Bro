@@ -5,6 +5,13 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+enum _state
+{
+    GROUNDED,
+	JUMPING,
+	DOUBLE_JUMP
+};
+
 public class PlayerController : MonoBehaviour
 {
 	private Rigidbody rb;
@@ -34,6 +41,8 @@ public class PlayerController : MonoBehaviour
 	private bool timerIsActive = true;
 
 	public int lives = 3;
+	private _state state;
+	public float doubleJumpForce = 4.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +53,7 @@ public class PlayerController : MonoBehaviour
 		spawnPoint = transform.position;
 		LevelCompleteTextObject.SetActive(false);
 		audioSource = GetComponent<AudioSource>();
+		state = _state.GROUNDED;
     }
 
 	void OnMove(InputValue movementValue)
@@ -68,11 +78,42 @@ public class PlayerController : MonoBehaviour
 
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
+		// if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
+		// {
+		// 	Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
+		// 	rb.AddForce(jump, ForceMode.Impulse);
+		// 	audioSource.PlayOneShot(jumpAudio, 1.0f);
+		// }
+		
+		// check to see if we have landed
+
+		switch (state)
 		{
-			Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
-			rb.AddForce(jump, ForceMode.Impulse);
-			audioSource.PlayOneShot(jumpAudio, 1.0f);
+			case _state.GROUNDED:
+			    if (Input.GetKeyDown(KeyCode.Space)) 
+				{
+					Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
+					rb.AddForce(jump, ForceMode.Impulse);
+					audioSource.PlayOneShot(jumpAudio, 0.4f);
+					state = _state.JUMPING;
+				}
+				break;
+
+			case _state.JUMPING:
+			    if (Input.GetKeyDown(KeyCode.Space))
+				{
+					Vector3 dbjump = new Vector3(rb.velocity.x, doubleJumpForce, rb.velocity.z);
+					rb.velocity = dbjump;
+					audioSource.PlayOneShot(jumpAudio, 0.4f);
+					state = _state.DOUBLE_JUMP;
+				}
+				break;
+
+			case _state.DOUBLE_JUMP:
+				// dont do anything here, just wait to land
+				break;
+
+
 		}
 
 		if (timerIsActive) // Add this line
@@ -115,6 +156,7 @@ public class PlayerController : MonoBehaviour
 			transform.parent = other.gameObject.transform;
 			// Calculate the player's position relative to the platform
 			relativePosition = transform.position - other.gameObject.transform.position;
+			state = _state.GROUNDED;
 		}
 
 		if (other.gameObject.tag == "StreetCred")
@@ -152,6 +194,8 @@ public class PlayerController : MonoBehaviour
 
 		if (other.gameObject.tag == "Spike")
 		{
+			// on contact with spike, remove life, send back to last
+			// spawn point, and play sound.
 			transform.position = spawnPoint;
 			audioSource.PlayOneShot(respawnAudio, 1.0f);
 			lives--;
@@ -159,14 +203,23 @@ public class PlayerController : MonoBehaviour
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
+			// make the parent of the player the moving platform
 			transform.parent = other.gameObject.transform;
+			state = _state.GROUNDED;
+		}
+		else if (other.gameObject.tag == "Platform")
+		{
+			state = _state.GROUNDED;
 		}
 		else if (other.gameObject.tag == "FinalPlatform")
 		{
+			// upon touching final platform, show complete lv UI
+			// turn off timer, and play win audio
 			LevelCompleteTextObject.SetActive(true);
 			rainbowText.StarColorChange();
 			timerIsActive = false;
 			audioSource.PlayOneShot(winAudio, 1.0f);
+			state = _state.GROUNDED;
 		}
 	}
 
@@ -195,16 +248,20 @@ public class PlayerController : MonoBehaviour
 
 	void UpdateScore()
 	{
+		// update the score UI
 		scoreText.text = "Credits: " + score.ToString();
 	}
 
 	void UpdateLives()
 	{
+		// update the lives UI
 		livesText.text = "Lives: " + lives.ToString();
 	}
 
 	void Die()
 	{
+		// in the absence of a correct level reload, simply reload this active scene
+		// TODO
 		Scene scene = SceneManager.GetActiveScene();
 		SceneManager.LoadScene(scene.name);
 	}
