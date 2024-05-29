@@ -78,18 +78,10 @@ public class PlayerController : MonoBehaviour
 
 
 	void Update() {
-		// if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
-		// {
-		// 	Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
-		// 	rb.AddForce(jump, ForceMode.Impulse);
-		// 	audioSource.PlayOneShot(jumpAudio, 1.0f);
-		// }
-		
-		// check to see if we have landed
-
 		switch (state)
 		{
 			case _state.GROUNDED:
+				rb.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
 			    if (Input.GetKeyDown(KeyCode.Space)) 
 				{
 					Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
