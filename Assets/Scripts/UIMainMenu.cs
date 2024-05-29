@@ -9,7 +9,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Level1");
     }
     public void QuitGame()
     {
@@ -17,6 +17,6 @@ public class UIMainMenu : MonoBehaviour
     }
     public void PlayTutorial()
     {
-        PlayGame();
+        SceneManager.LoadScene("TutorialLevel");
     }
 }
