@@ -18,7 +18,7 @@ public class Walls1 : MonoBehaviour
     void Start()
     {
         leftLimit = transform.position.x - Offset;
-        rightLimit = transform.position.x + Offset;
+        rightLimit = transform.position.x;
         rb = GetComponent<Rigidbody>();
         movingRight = false; // Start by moving left
     }
