@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 enum _state
 {
@@ -43,6 +44,16 @@ public class PlayerController : MonoBehaviour
 	public int lives = 3;
 	private _state state;
 	public float doubleJumpForce = 4.0f;
+	public float doubleJumpForce_baseline = 4.0f;
+
+
+
+	public int powerup_current = 0;
+	public float powerup_time = 0.0f;
+	public float powerrup_max_time = 0.0f;
+	public float powerup_doublejump_boost = 2.5f;
+	public float powerup_time_slow = 0.75f;
+	public bool powerup_applied = false;
 
     // Start is called before the first frame update
     void Start()
@@ -121,8 +132,71 @@ public class PlayerController : MonoBehaviour
 		{
 			Die();
 		}
-	}
 
+		if(powerup_current!=0)
+		{
+			//float time_mult = 1.0f;
+			if(!powerup_applied)
+			{
+				switch (powerup_current)
+				{
+
+					case 1:
+						this.doubleJumpForce = this.doubleJumpForce_baseline * this.powerup_doublejump_boost;
+						break;
+					case 2:
+						Time.timeScale = this.powerup_time_slow;
+						//time_mult = (1+ (1-this.powerup_time_slow));
+						break;
+					case 3:
+                        UpdateLives();
+						break;
+
+
+
+
+                }
+                powerup_applied = true;
+			}
+			
+
+			if (powerup_time >= powerrup_max_time)
+            {
+				switch(powerup_current)
+				{
+					case 1:
+						this.doubleJumpForce = this.doubleJumpForce_baseline;
+						
+						break;
+					case 2:
+                        Time.timeScale = 1f;
+
+                        break;
+					case 3:
+						break;
+				}
+				Debug.Log("reset");
+				powerup_current = 0;
+                UpdateLives();
+
+
+            }
+            //powerup_time += Time.deltaTime* time_mult;
+            powerup_time += Time.unscaledDeltaTime;
+        }
+
+
+	}
+	public void PowerUp(int type, float duration)
+	{
+		if (powerup_current != 0) return;
+        this.powerrup_max_time = duration;
+        this.powerup_time = 0.0f;
+        this.powerup_current = type;
+		this.powerup_applied = false;
+
+        Debug.Log("applied powerup: " + type);
+    }
 	void FixedUpdate()
 	{
 		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
@@ -137,6 +211,16 @@ public class PlayerController : MonoBehaviour
 			rb.velocity = new Vector3(horizontalVelocity.x, rb.velocity.y, horizontalVelocity.z);
 		}
 	}
+
+
+	private void Respawn()
+	{
+        transform.position = spawnPoint;
+        audioSource.PlayOneShot(respawnAudio, 1.0f);
+        if(powerup_current != 3)
+			lives--;
+        UpdateLives();
+    }
 
 	private Vector3 relativePosition;
 
@@ -172,10 +256,7 @@ public class PlayerController : MonoBehaviour
 		if (other.gameObject.tag == "RespawnBarrier")
 		{
 			// if you hit respawn barrier, spawn at last cp
-			transform.position = spawnPoint;
-			audioSource.PlayOneShot(respawnAudio, 1.0f);
-			lives--;
-			UpdateLives();
+			Respawn();
 		}
 	}
 	
@@ -188,10 +269,7 @@ public class PlayerController : MonoBehaviour
 		{
 			// on contact with spike, remove life, send back to last
 			// spawn point, and play sound.
-			transform.position = spawnPoint;
-			audioSource.PlayOneShot(respawnAudio, 1.0f);
-			lives--;
-			UpdateLives();
+			Respawn();
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
@@ -247,7 +325,13 @@ public class PlayerController : MonoBehaviour
 	void UpdateLives()
 	{
 		// update the lives UI
-		livesText.text = "Lives: " + lives.ToString();
+		int l = lives;
+
+        if (powerup_current == 3)
+		{
+			l = 99999;
+		}
+		livesText.text = "Lives: " + l.ToString();
 	}
 
 	void Die()
