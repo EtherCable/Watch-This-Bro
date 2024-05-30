@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
 	public RainbowText rainbowText;
 
-	private float timer = 0.0f;
+	public float timer = 0.0f;
 	private bool timerIsActive = true;
 
 	public int lives = 3;
@@ -57,11 +57,12 @@ public class PlayerController : MonoBehaviour
 	public int powerup_current = 0;
 	public float powerup_time = 0.0f;
 	public float powerrup_max_time = 0.0f;
-	public float powerup_doublejump_boost = 2.5f;
-	public float powerup_time_slow = 0.5f;
+	private float powerup_doublejump_boost = 2.5f;
+    private float powerup_time_slow = 0.5f;
 	public bool powerup_applied = false;
 
 	public GameObject death_screen;
+	public LevelSystem level_sys;
 
     // Start is called before the first frame update
     void Start()
@@ -365,9 +366,8 @@ public class PlayerController : MonoBehaviour
         }
 		Debug.Log("done");
 		vpobj.SetActive(false);
-        //Time.timeScale = 1f;
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+		//Time.timeScale = 1f;
+		this.level_sys.LoadLevel();
 		Time.timeScale = 1f;
 	}
 

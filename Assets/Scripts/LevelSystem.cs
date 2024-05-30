@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSystem : MonoBehaviour
 {
@@ -8,7 +9,10 @@ public class LevelSystem : MonoBehaviour
     public int current_level = 0;
     public List<GameObject> levels;
     public GameObject player;
-	public AudioClip sound;
+	//public AudioClip sound;
+    public int starting_lives = 5;
+    public Material default_skybox;
+    
 
 
 
@@ -19,7 +23,25 @@ public class LevelSystem : MonoBehaviour
         {
             level.SetActive(false);
         }
-        LoadLevel(current_level);
+        Debug.Log("level sys start. loading level " + current_level);
+        //if (lvl == -1) lvl = this.current_level;
+        GameObject nlvl = this.levels[Globals.current_level];
+        Level lvl = nlvl.GetComponent<Level>();
+        RenderSettings.skybox = lvl.skybox != null ? lvl.skybox : this.default_skybox;
+        //GameObject nlvl = this.levels[lvl];
+
+        //olvl.SetActive(false);
+        nlvl.SetActive(true);
+        Vector3 sp = lvl.StartPos.transform.position;
+        this.player.transform.position = sp;
+
+        PlayerController p = this.player.GetComponent<PlayerController>();
+        p.spawnPoint = sp;
+        p.level_sys = this;
+        p.lives = starting_lives;
+        p.timer = 0f;
+
+        //LoadLevel(current_level);
 
     }
 
@@ -31,25 +53,20 @@ public class LevelSystem : MonoBehaviour
 
     public void LevelUp()
     {
-        this.LoadLevel(this.current_level+1);
-        this.current_level++;
-		player.GetComponent<AudioSource>().PlayOneShot(sound, 1.0f);
+        this.LoadLevel(Globals.current_level+1);
+		//player.GetComponent<AudioSource>().PlayOneShot(sound, 1.0f);
     }
 
     public void LoadLevel(int lvl = -1)
     {
-        if (lvl == -1) lvl = this.current_level;
-        GameObject olvl = this.levels[this.current_level];
-        GameObject nlvl = this.levels[lvl];
-
-        olvl.SetActive(false);
-        nlvl.SetActive(true);
-        Vector3 sp = nlvl.GetComponent<Level>().StartPos.transform.position;
-        this.player.transform.position = sp;
-        this.player.GetComponent<PlayerController>().spawnPoint = sp;
+       if(lvl != -1)
+        {
+            Globals.current_level = lvl;
+        }
+       
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
 
-        
 
     }
 }

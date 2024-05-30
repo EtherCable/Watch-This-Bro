@@ -9,7 +9,8 @@ public class UIMainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Level1");
+        Globals.current_level = 1;
+        SceneManager.LoadScene(1);
     }
     public void QuitGame()
     {
@@ -17,6 +18,7 @@ public class UIMainMenu : MonoBehaviour
     }
     public void PlayTutorial()
     {
-        SceneManager.LoadScene("TutorialLevel");
+        Globals.current_level = 0;
+        SceneManager.LoadScene(1);
     }
 }

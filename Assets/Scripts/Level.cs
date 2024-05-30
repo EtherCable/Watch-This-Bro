@@ -8,6 +8,7 @@ public class Level : MonoBehaviour
 
     public GameObject StartPos;
     public GameObject LevelSys;
+    public Material skybox= null;
 
     // Start is called before the first frame update
     void Start()
