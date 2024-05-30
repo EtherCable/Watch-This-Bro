@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.Video;
+using static Unity.VisualScripting.Member;
 
 enum _state
 {
@@ -23,6 +25,10 @@ public class PlayerController : MonoBehaviour
 	public AudioClip respawnAudio;
 	public AudioClip jumpAudio;
 	public AudioClip checkpointAudio;
+
+	public AudioClip powerup_jump_audio;
+	public AudioClip powerup_lives_audio;
+	public AudioClip powerup_timeslow_audio;
 
 	private float movementX;
 	private float movementY;
@@ -52,8 +58,10 @@ public class PlayerController : MonoBehaviour
 	public float powerup_time = 0.0f;
 	public float powerrup_max_time = 0.0f;
 	public float powerup_doublejump_boost = 2.5f;
-	public float powerup_time_slow = 0.75f;
+	public float powerup_time_slow = 0.5f;
 	public bool powerup_applied = false;
+
+	public GameObject death_screen;
 
     // Start is called before the first frame update
     void Start()
@@ -128,10 +136,10 @@ public class PlayerController : MonoBehaviour
 			timerText.text = string.Format("Time: {0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
 		}
 
-		if (lives == 0)
-		{
-			Die();
-		}
+		//if (lives == 0)
+		//{
+		//	Die();
+		//}
 
 		if(powerup_current!=0)
 		{
@@ -143,14 +151,17 @@ public class PlayerController : MonoBehaviour
 
 					case 1:
 						this.doubleJumpForce = this.doubleJumpForce_baseline * this.powerup_doublejump_boost;
+						audioSource.PlayOneShot(this.powerup_jump_audio);
 						break;
 					case 2:
 						Time.timeScale = this.powerup_time_slow;
-						//time_mult = (1+ (1-this.powerup_time_slow));
-						break;
+                        //time_mult = (1+ (1-this.powerup_time_slow));
+                        audioSource.PlayOneShot(this.powerup_timeslow_audio);
+                        break;
 					case 3:
                         UpdateLives();
-						break;
+                        audioSource.PlayOneShot(this.powerup_lives_audio);
+                        break;
 
 
 
@@ -215,11 +226,22 @@ public class PlayerController : MonoBehaviour
 
 	private void Respawn()
 	{
-        transform.position = spawnPoint;
-        audioSource.PlayOneShot(respawnAudio, 1.0f);
+       
         if(powerup_current != 3)
 			lives--;
+
         UpdateLives();
+        if (lives == 0)
+		{
+			Die();
+		}
+		else
+		{
+            transform.position = spawnPoint;
+            audioSource.PlayOneShot(respawnAudio, 1.0f);
+        }
+
+        
     }
 
 	private Vector3 relativePosition;
@@ -329,17 +351,36 @@ public class PlayerController : MonoBehaviour
 
         if (powerup_current == 3)
 		{
-			l = 99999;
+			l = 9001;
 		}
 		livesText.text = "Lives: " + l.ToString();
+	}
+    IEnumerator WaitForVideo(GameObject vpobj)
+    {
+		VideoPlayer vp = vpobj.GetComponent<VideoPlayer>();
+		//Debug.Log($"({vp.frame})/({vp.frameCount})");
+        while (vp.frame != ((long)vp.frameCount)-1)
+        {
+            yield return null;
+        }
+		Debug.Log("done");
+		vpobj.SetActive(false);
+        //Time.timeScale = 1f;
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+		Time.timeScale = 1f;
 	}
 
 	void Die()
 	{
 		// in the absence of a correct level reload, simply reload this active scene
 		// TODO
-		Scene scene = SceneManager.GetActiveScene();
-		SceneManager.LoadScene(scene.name);
+		this.powerup_current = 0;
+		this.death_screen.SetActive(true);
+
+		StartCoroutine(WaitForVideo(this.death_screen));
+		//this.transform.position.Set(this.transform.position.x, this.transform.position.y + 1000,this.transform.position.z);
+		Time.timeScale = 0f;
 	}
 	
 }

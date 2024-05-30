@@ -1384,6 +1384,7 @@ RectTransform:
   - {fileID: 585550437}
   - {fileID: 1774349450}
   - {fileID: 1084914068}
+  - {fileID: 1770493253}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4834,6 +4835,115 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8350572268878168390, guid: 8af99ee0d2412224abfa8e5aace8643e, type: 3}
   m_PrefabInstance: {fileID: 7065485131417533731}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1770493252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1770493253}
+  - component: {fileID: 1770493255}
+  - component: {fileID: 1770493254}
+  - component: {fileID: 1770493256}
+  m_Layer: 5
+  m_Name: vid player death screen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1770493253
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770493252}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 427390285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -16, y: -32}
+  m_SizeDelta: {x: 118, y: 94}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &1770493254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770493252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: be06fbab034c65c459cc2f362f458d22, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1770493255
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770493252}
+  m_CullTransparentMesh: 1
+--- !u!328 &1770493256
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770493252}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 0c45274f87bc8a4429dbdff52bcb2370, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: be06fbab034c65c459cc2f362f458d22, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &1774349449
 GameObject:
   m_ObjectHideFlags: 0
@@ -6109,6 +6219,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1084914071}
     - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: death_screen
+      value: 
+      objectReference: {fileID: 1770493252}
+    - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: respawnAudio
       value: 
       objectReference: {fileID: 8300000, guid: 53e016a5a5a0e199ca43c012c1a0e1d5, type: 3}
@@ -6120,6 +6234,18 @@ PrefabInstance:
       propertyPath: jumpSpeedHeight
       value: 350
       objectReference: {fileID: 0}
+    - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: powerup_jump_audio
+      value: 
+      objectReference: {fileID: 8300000, guid: 104ef8b57d5da7e449dad9e9181ce552, type: 3}
+    - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: powerup_lives_audio
+      value: 
+      objectReference: {fileID: 8300000, guid: 178993692feed7f4bb7ce9e8e6afb712, type: 3}
+    - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: powerup_timeslow_audio
+      value: 
+      objectReference: {fileID: 8300000, guid: dd8c5524362a24a4bbaa01bcefb5249a, type: 3}
     - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: LevelCompleteTextObject
       value: 
@@ -6294,11 +6420,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2119773620700005671, guid: 2ac6fdd9c8cc7d8458cbebdc30368e54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.73
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 2119773620700005671, guid: 2ac6fdd9c8cc7d8458cbebdc30368e54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.2
+      value: 7.54
       objectReference: {fileID: 0}
     - target: {fileID: 2119773620700005671, guid: 2ac6fdd9c8cc7d8458cbebdc30368e54, type: 3}
       propertyPath: m_LocalRotation.w
