@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7071444, g: 0.77382594, b: 0.8840184, a: 1}
+  m_IndirectSpecularColor: {r: 0.22091505, g: 0.34413528, b: 0.52712685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4394,6 +4394,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &318824979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318824956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26177a381406454ea2aa84c28ba938e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayDistance: 12
 --- !u!43 &339345183
 Mesh:
   m_ObjectHideFlags: 0
@@ -5283,7 +5296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &387950296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5508,7 +5521,7 @@ GameObject:
   - component: {fileID: 407754192}
   m_Layer: 0
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5846,7 +5859,7 @@ GameObject:
   - component: {fileID: 416932213}
   m_Layer: 0
   m_Name: Text (TMP) (5)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6461,7 +6474,7 @@ GameObject:
   - component: {fileID: 434616903}
   m_Layer: 0
   m_Name: Text (TMP) (4)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10703,7 +10716,7 @@ GameObject:
   - component: {fileID: 771831037}
   m_Layer: 0
   m_Name: Text (TMP) (7)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16026,7 +16039,7 @@ GameObject:
   - component: {fileID: 1145181940}
   m_Layer: 0
   m_Name: Text (TMP) (8)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19171,7 +19184,7 @@ GameObject:
   - component: {fileID: 1304871051}
   m_Layer: 0
   m_Name: Text (TMP) (2)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19605,7 +19618,7 @@ GameObject:
   - component: {fileID: 1323434613}
   m_Layer: 0
   m_Name: Text (TMP) (1)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24003,7 +24016,7 @@ GameObject:
   - component: {fileID: 1541742905}
   m_Layer: 0
   m_Name: Text (TMP) (6)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28150,7 +28163,7 @@ GameObject:
   - component: {fileID: 1791465416}
   m_Layer: 0
   m_Name: Text (TMP) (3)
-  m_TagString: Untagged
+  m_TagString: HoverText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33770,6 +33783,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 318824972}
+    - targetCorrespondingSourceObject: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 318824979}
   m_SourcePrefab: {fileID: 100100000, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
 --- !u!1001 &1655687238745937625
 PrefabInstance:

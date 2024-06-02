@@ -11,6 +11,7 @@ TagManager:
   - FinalPlatform
   - Spike
   - Platform
+  - HoverText
   layers:
   - Default
   - TransparentFX
