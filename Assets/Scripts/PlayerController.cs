@@ -251,6 +251,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if(other.gameObject.tag == "MovingPlatform")
 		{
+			Debug.Log("grounded moving platform trigger: " + other.gameObject.name + $"({Time.frameCount})");
 			// Make the platform the parent of the player
 			transform.parent = other.gameObject.transform;
 			// Calculate the player's position relative to the platform
@@ -282,12 +283,13 @@ public class PlayerController : MonoBehaviour
 			Respawn();
 		}
 	}
-	
+
+	private  const float stickyness_margin = 0.85f;
 	
 	void OnCollisionEnter(Collision other)
 	{
 		Rigidbody playerRigidbody = GetComponent<Rigidbody>(); // Assuming the player has a Rigidbody component
-
+		bool plat = false;
 		if (other.gameObject.tag == "Spike")
 		{
 			// on contact with spike, remove life, send back to last
@@ -296,25 +298,44 @@ public class PlayerController : MonoBehaviour
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
-			// make the parent of the player the moving platform
-			transform.parent = other.gameObject.transform;
-			state = _state.GROUNDED;
-		}
-		else if (other.gameObject.tag == "Platform")
+            // https://forum.unity.com/threads/player-can-jump-when-touching-the-side-or-bottom-of-a-platform.1552844/
+            if (other.contacts[0].normal.y >= stickyness_margin)
+			{
+                // make the parent of the player the moving platform
+                transform.parent = other.gameObject.transform;
+                state = _state.GROUNDED;
+                Debug.Log("grounded moving platform collision: " + other.gameObject.name + $"({Time.frameCount})");
+            }
+			
+
+        }
+        else if (other.gameObject.tag == "Platform")
 		{
-			state = _state.GROUNDED;
-		}
-		else if (other.gameObject.tag == "FinalPlatform")
+			if (other.contacts[0].normal.y >= stickyness_margin)
+			{
+				state = _state.GROUNDED;
+				Debug.Log("grounded  platform collision :"  + other.gameObject.name + $"({Time.frameCount})");
+
+            }
+        }
+        else if (other.gameObject.tag == "FinalPlatform")
 		{
 			// upon touching final platform, show complete lv UI
 			// turn off timer, and play win audio
-			LevelCompleteTextObject.SetActive(true);
-			rainbowText.StarColorChange();
-			timerIsActive = false;
-			audioSource.PlayOneShot(winAudio, 1.0f);
-			state = _state.GROUNDED;
-		}
-	}
+			if (other.contacts[0].normal.y >= stickyness_margin)
+			{
+				LevelCompleteTextObject.SetActive(true);
+				rainbowText.StarColorChange();
+				timerIsActive = false;
+				audioSource.PlayOneShot(winAudio, 1.0f);
+				state = _state.GROUNDED;
+				Debug.Log("grounded final platform collision: " + other.gameObject.name + $"({Time.frameCount})");
+
+            }
+        }
+
+
+    }
 
 
 	void OnCollisionStay(Collision other)
@@ -325,7 +346,7 @@ public class PlayerController : MonoBehaviour
 		if (transform.position.y <= other.transform.position.y)
 		{
 			// Player is not on top of the platform, send him back to spawn
-			transform.position = spawnPoint;
+			//transform.position = spawnPoint;
 		}
 	}
 
