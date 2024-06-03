@@ -273,10 +273,17 @@ public class PlayerController : MonoBehaviour
 			// if you hit respawn barrier, spawn at last cp
 			Respawn();
 		}
+		if (other.gameObject.tag == "MovingPlatform")
+		{
+			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
+		}
+		if (other.gameObject.tag == "Platform")
+		{
+			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
+		}
+
 	}
 
-	private  const float stickyness_margin = 0.85f;
-	
 	void OnCollisionEnter(Collision other)
 	{
 		Rigidbody playerRigidbody = GetComponent<Rigidbody>(); // Assuming the player has a Rigidbody component
@@ -289,48 +296,35 @@ public class PlayerController : MonoBehaviour
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
-            // https://forum.unity.com/threads/player-can-jump-when-touching-the-side-or-bottom-of-a-platform.1552844/
-            if (other.contacts[0].normal.y >= stickyness_margin)
-			{
-                // make the parent of the player the moving platform
-                transform.parent = other.gameObject.transform;
-                state = _state.GROUNDED;
-                Debug.Log("grounded moving platform collision: " + other.gameObject.name + $"({Time.frameCount})");
-            }
-			
+            state = _state.GROUNDED;
+            Debug.Log("grounded moving platform collision: " + other.gameObject.name + $"({Time.frameCount})");
 
         }
         else if (other.gameObject.tag == "Platform")
 		{
-			if (other.contacts[0].normal.y >= stickyness_margin)
-			{
-				state = _state.GROUNDED;
-				Debug.Log("grounded  platform collision :"  + other.gameObject.name + $"({Time.frameCount})");
+			state = _state.GROUNDED;
+			Debug.Log("grounded  platform collision :"  + other.gameObject.name + $"({Time.frameCount})");
 
-            }
         }
         else if (other.gameObject.tag == "FinalPlatform")
 		{
 			// upon touching final platform, show complete lv UI
 			// turn off timer, and play win audio
-			if (other.contacts[0].normal.y >= stickyness_margin)
-			{
-				LevelCompleteTextObject.SetActive(true);
-				if (level_sys.current_level == 0) {
-					LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Tutorial Level\nComplete!";
-				}
-				else {
-					LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level " + level_sys.current_level + "\nComplete!";
-				}
-				rainbowText.StarColorChange();
-				GameObject.FindWithTag("TimerColor").GetComponent<RainbowText>().StarColorChange();
-				GameObject.FindWithTag("CreditsColor").GetComponent<RainbowText>().StarColorChange();
-				timerIsActive = false;
-				audioSource.PlayOneShot(winAudio, 1.0f);
-				state = _state.GROUNDED;
-				Debug.Log("grounded final platform collision: " + other.gameObject.name + $"({Time.frameCount})");
+			LevelCompleteTextObject.SetActive(true);
+			if (level_sys.current_level == 0) {
+				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Tutorial Level\nComplete!";
+			}
+			else {
+				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level " + level_sys.current_level + "\nComplete!";
+			}
+			rainbowText.StarColorChange();
+			GameObject.FindWithTag("TimerColor").GetComponent<RainbowText>().StarColorChange();
+			GameObject.FindWithTag("CreditsColor").GetComponent<RainbowText>().StarColorChange();
+			timerIsActive = false;
+			audioSource.PlayOneShot(winAudio, 1.0f);
+			state = _state.GROUNDED;
+			Debug.Log("grounded final platform collision: " + other.gameObject.name + $"({Time.frameCount})");
 
-            }
         }
 
 
@@ -343,7 +337,7 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Log("grounded moving platform trigger: " + other.gameObject.name + $"({Time.frameCount})");
 			// Make the platform the parent of the player
-			transform.parent = other.gameObject.transform;
+			//transform.parent = other.gameObject.transform;
 			// Calculate the player's position relative to the platform
 			//relativePosition = transform.position - other.gameObject.transform.position;
 			state = _state.GROUNDED;
@@ -351,11 +345,11 @@ public class PlayerController : MonoBehaviour
 		// Assuming the player has a Rigidbody component
 		Rigidbody playerRigidbody = GetComponent<Rigidbody>();
 
-		if (transform.position.y <= other.transform.position.y)
-		{
+		//if (transform.position.y <= other.transform.position.y)
+		//{
 			// Player is not on top of the platform, send him back to spawn
 			//transform.position = spawnPoint;
-		}
+		//}
 	}
 
 

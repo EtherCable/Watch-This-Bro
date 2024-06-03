@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Offset: 0
   speed: 0
+  pauseTime: 2
 --- !u!54 &8145529242673596953
 Rigidbody:
   m_ObjectHideFlags: 0
