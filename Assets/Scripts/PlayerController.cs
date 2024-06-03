@@ -64,9 +64,12 @@ public class PlayerController : MonoBehaviour
 	public GameObject death_screen;
 	public LevelSystem level_sys;
 
+	private bool onMovingPlatform;
+
     // Start is called before the first frame update
     void Start()
     {
+		onMovingPlatform = false;
 		Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
 		UpdateScore();
@@ -102,15 +105,18 @@ public class PlayerController : MonoBehaviour
 		switch (state)
 		{
 			case _state.GROUNDED:
-				rb.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
-			    if (Input.GetKeyDown(KeyCode.Space)) 
+                rb.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+                if (!onMovingPlatform && Input.GetKeyDown(KeyCode.Space))
+                {
+                    Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
+                    rb.AddForce(jump, ForceMode.Impulse);
+                    audioSource.PlayOneShot(jumpAudio, 0.4f);
+                    state = _state.JUMPING;
+                } else if (onMovingPlatform && Input.GetKeyDown(KeyCode.Space))
 				{
-					Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
-					rb.AddForce(jump, ForceMode.Impulse);
-					audioSource.PlayOneShot(jumpAudio, 0.4f);
-					state = _state.JUMPING;
+					state = _state.DOUBLE_JUMP;
 				}
-				break;
+                break;
 
 			case _state.JUMPING:
 			    if (Input.GetKeyDown(KeyCode.Space))
@@ -125,8 +131,6 @@ public class PlayerController : MonoBehaviour
 			case _state.DOUBLE_JUMP:
 				// dont do anything here, just wait to land
 				break;
-
-
 		}
 
 		if (timerIsActive) // Add this line
@@ -241,6 +245,7 @@ public class PlayerController : MonoBehaviour
 		{
             transform.position = spawnPoint;
             audioSource.PlayOneShot(respawnAudio, 1.0f);
+			this.onMovingPlatform = false;
         }
 
         
@@ -275,13 +280,31 @@ public class PlayerController : MonoBehaviour
 		}
 		if (other.gameObject.tag == "MovingPlatform")
 		{
+			onMovingPlatform = true;
+			state = _state.GROUNDED;
 			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
 		}
 		if (other.gameObject.tag == "Platform")
 		{
+			onMovingPlatform = true;
+			state = _state.GROUNDED;
 			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
 		}
 
+	}
+
+	void OnTriggerStay(Collider other)
+	{
+		if (other.gameObject.tag == "MovingPlatform")
+		{
+			onMovingPlatform = true;
+			state = _state.GROUNDED;
+		}
+		if (other.gameObject.tag == "Platform")
+		{
+			onMovingPlatform = true;
+			state = _state.GROUNDED;
+		}
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -359,16 +382,17 @@ public class PlayerController : MonoBehaviour
 		{
 			// Remove the platform as the parent of the player
 			transform.parent = null;
+			this.onMovingPlatform = false;
 		}
 	}
 
 	void OnCollisionExit(Collision other)
 	{
-		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform")
+		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform" || other.gameObject.tag == "RespawnBarrier")
 		{
 			// Remove the platform as the parent of the player
 			transform.parent = null;
-			state = _state.JUMPING;
+			this.onMovingPlatform = false;
 		}
 	}
 
@@ -420,6 +444,7 @@ public class PlayerController : MonoBehaviour
 	{
 		// in the absence of a correct level reload, simply reload this active scene
 		// TODO
+		this.onMovingPlatform = false;
 		this.powerup_current = 0;
 		this.death_screen.SetActive(true);
 
