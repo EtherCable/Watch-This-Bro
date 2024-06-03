@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 	public float timer = 0.0f;
 	private bool timerIsActive = true;
 
-	public int lives = 3;
+	public int lives = 5;
 	private _state state;
 	public float doubleJumpForce = 4.0f;
 	public float doubleJumpForce_baseline = 4.0f;
@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour
 	void OnCollisionEnter(Collision other)
 	{
 		Rigidbody playerRigidbody = GetComponent<Rigidbody>(); // Assuming the player has a Rigidbody component
-		bool plat = false;
+		//bool plat = false;
 		if (other.gameObject.tag == "Spike")
 		{
 			// on contact with spike, remove life, send back to last
@@ -325,7 +325,15 @@ public class PlayerController : MonoBehaviour
 			if (other.contacts[0].normal.y >= stickyness_margin)
 			{
 				LevelCompleteTextObject.SetActive(true);
+				if (level_sys.current_level == 0) {
+					LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Tutorial Level\nComplete!";
+				}
+				else {
+					LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level " + level_sys.current_level + "\nComplete!";
+				}
 				rainbowText.StarColorChange();
+				GameObject.FindWithTag("TimerColor").GetComponent<RainbowText>().StarColorChange();
+				GameObject.FindWithTag("CreditsColor").GetComponent<RainbowText>().StarColorChange();
 				timerIsActive = false;
 				audioSource.PlayOneShot(winAudio, 1.0f);
 				state = _state.GROUNDED;
@@ -368,15 +376,27 @@ public class PlayerController : MonoBehaviour
 
 	void UpdateLives()
 	{
-		// update the lives UI
 		int l = lives;
-
-        if (powerup_current == 3)
+		if (powerup_current == 3)
 		{
 			l = 9001;
 		}
-		livesText.text = "Lives: " + l.ToString();
+
+		if (l == 9001)
+		{
+			livesText.text = l.ToString() + "♥";
+		}
+		else if (l == 0)
+		{
+			livesText.text = "";
+		}
+		else
+		{
+			livesText.text = new String('♥', l);
+		}
+		livesText.color = Color.red;
 	}
+
     IEnumerator WaitForVideo(GameObject vpobj)
     {
 		VideoPlayer vp = vpobj.GetComponent<VideoPlayer>();

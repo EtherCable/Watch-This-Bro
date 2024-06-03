@@ -9,7 +9,7 @@ public class RainbowText : MonoBehaviour
     private Color currentColor = Color.red;
     private void Start()
     {
-        StartCoroutine(ChangeColor());
+        
     }
 
     public void StarColorChange()

@@ -12,6 +12,8 @@ TagManager:
   - Spike
   - Platform
   - HoverText
+  - TimerColor
+  - CreditsColor
   layers:
   - Default
   - TransparentFX
