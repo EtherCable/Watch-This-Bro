@@ -10,7 +10,6 @@ public class PauseMenu : MonoBehaviour
     void Start ()
     {
         EnableChildren(false);
-        Cursor.visible = true;
     }
 
     // Update is called once per frame
@@ -22,11 +21,13 @@ public class PauseMenu : MonoBehaviour
             {
                 Time.timeScale = 0; // Pauses the game
                 EnableChildren(true); // Activates the children of the pause menu
+                Cursor.visible = true;
             }
             else
             {
                 Time.timeScale = 1; // Resumes the game
                 EnableChildren(false); // Deactivates the children of the pause menu
+                Cursor.visible = false;
             }
         }
     }
@@ -36,6 +37,7 @@ public class PauseMenu : MonoBehaviour
         foreach (Transform child in pauseMenuUI.transform)
         {
             child.gameObject.SetActive(isEnabled);
+            pauseMenuUI.transform.Find("Keybinds").gameObject.SetActive(false);
         }
     }
 
@@ -43,18 +45,22 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1; // Resumes the game
         EnableChildren(false); // Deactivates the children of the pause menu
-        Cursor.visible = false;
     }
     public void Restart()
     {
         //reload scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
-        Cursor.visible = false;
     }
     public void MainMenu()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu");
+    }
+    public void Keybinds()
+    {
+        EnableChildren(false);
+        //enable canvas child called Keybinds
+        pauseMenuUI.transform.Find("Keybinds").gameObject.SetActive(true);
     }
 }
