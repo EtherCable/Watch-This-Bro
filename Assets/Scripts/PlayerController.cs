@@ -245,20 +245,10 @@ public class PlayerController : MonoBehaviour
         
     }
 
-	private Vector3 relativePosition;
+	//private Vector3 relativePosition;
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.gameObject.tag == "MovingPlatform")
-		{
-			Debug.Log("grounded moving platform trigger: " + other.gameObject.name + $"({Time.frameCount})");
-			// Make the platform the parent of the player
-			transform.parent = other.gameObject.transform;
-			// Calculate the player's position relative to the platform
-			relativePosition = transform.position - other.gameObject.transform.position;
-			state = _state.GROUNDED;
-		}
-
 		if (other.gameObject.tag == "StreetCred")
 		{
 			// make coin disappear
@@ -347,7 +337,16 @@ public class PlayerController : MonoBehaviour
 
 
 	void OnCollisionStay(Collision other)
-	{
+	{	
+		if(other.gameObject.tag == "MovingPlatform")
+		{
+			Debug.Log("grounded moving platform trigger: " + other.gameObject.name + $"({Time.frameCount})");
+			// Make the platform the parent of the player
+			transform.parent = other.gameObject.transform;
+			// Calculate the player's position relative to the platform
+			//relativePosition = transform.position - other.gameObject.transform.position;
+			state = _state.GROUNDED;
+		}
 		// Assuming the player has a Rigidbody component
 		Rigidbody playerRigidbody = GetComponent<Rigidbody>();
 
@@ -365,6 +364,16 @@ public class PlayerController : MonoBehaviour
 		{
 			// Remove the platform as the parent of the player
 			transform.parent = null;
+		}
+	}
+
+	void OnCollisionExit(Collision other)
+	{
+		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform")
+		{
+			// Remove the platform as the parent of the player
+			transform.parent = null;
+			state = _state.JUMPING;
 		}
 	}
 
