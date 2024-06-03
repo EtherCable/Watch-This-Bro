@@ -45,12 +45,14 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1; // Resumes the game
         EnableChildren(false); // Deactivates the children of the pause menu
+        Cursor.visible = false;
     }
     public void Restart()
     {
         //reload scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        Cursor.visible = false;
     }
     public void MainMenu()
     {
@@ -62,5 +64,6 @@ public class PauseMenu : MonoBehaviour
         EnableChildren(false);
         //enable canvas child called Keybinds
         pauseMenuUI.transform.Find("Keybinds").gameObject.SetActive(true);
+        Cursor.visible = false;
     }
 }

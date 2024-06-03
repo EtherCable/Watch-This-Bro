@@ -1,32 +1,50 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class ProximityRender : MonoBehaviour
+
+public class DistanceCheck : MonoBehaviour
 {
-    public GameObject player;
-    public float renderDistance = 5f;
+    public float maxDistance = 45f;
+    public LevelSystem level_sys;
+    private string curr_level_str;
+    private List<string> tags = new List<string> { "Platform", "MovingPlatform", "Spike" };
+
+    private Dictionary<string, GameObject[]> objectsByTag = new Dictionary<string, GameObject[]>();
+
+    void Start()
+    {
+        if (level_sys.current_level == 0) {
+            curr_level_str = "Level0";
+        }
+        else if (level_sys.current_level == 1) {
+            curr_level_str = "Level1";
+        }
+        else if (level_sys.current_level == 2) {
+            curr_level_str = "Level2";
+        }
+
+        foreach (var tag in tags)
+        {
+            objectsByTag[tag] = GameObject.FindGameObjectsWithTag(tag);
+        }
+    }
 
     void Update()
     {
-        // Calculate the distance between the player and the parent object
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-
-        // Loop through each child of the parent object
-        foreach (Transform child in transform)
+        foreach (var tag in tags)
         {
-            Renderer renderer = child.gameObject.GetComponent<Renderer>();
-
-            // Check if the Renderer component exists
-            if (renderer != null)
+            foreach (GameObject obj in objectsByTag[tag])
             {
-                // If the distance is less than the threshold, enable rendering
-                if (distance < renderDistance)
+                Transform parent = obj.transform.parent;
+                while (parent != null)
                 {
-                    renderer.enabled = true;
-                }
-                // If the distance is greater than the threshold, disable rendering
-                else
-                {
-                    renderer.enabled = false;
+                    if (parent.name == curr_level_str)
+                    {
+                        float distance = Vector3.Distance(transform.position, obj.transform.position);
+                        obj.GetComponent<Renderer>().enabled = distance <= maxDistance;
+                        break;
+                    }
+                    parent = parent.parent;
                 }
             }
         }

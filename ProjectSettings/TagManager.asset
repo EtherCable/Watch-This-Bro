@@ -14,6 +14,7 @@ TagManager:
   - HoverText
   - TimerColor
   - CreditsColor
+  - Star
   layers:
   - Default
   - TransparentFX

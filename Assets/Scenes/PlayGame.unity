@@ -5008,6 +5008,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26177a381406454ea2aa84c28ba938e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &318824986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318824956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12bb6219f2ee1284ca302184746f4246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 45
+  level_sys: {fileID: 102217497}
 --- !u!43 &339345183
 Mesh:
   m_ObjectHideFlags: 0
@@ -5209,7 +5223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10.700012, y: -6.953003}
+  m_AnchoredPosition: {x: 10.699951, y: -6.953003}
   m_SizeDelta: {x: 200, y: 28.093994}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &352576467
@@ -5589,6 +5603,10 @@ PrefabInstance:
     - target: {fileID: 791126609071756567, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_Name
       value: LevelUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 791126609071756567, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
+      propertyPath: m_TagString
+      value: Star
       objectReference: {fileID: 0}
     - target: {fileID: 1014465117561712320, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6297,12 +6315,12 @@ GameObject:
   - component: {fileID: 387950297}
   - component: {fileID: 387950296}
   m_Layer: 0
-  m_Name: level0 tutorial
+  m_Name: Level0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &387950296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8437,7 +8455,7 @@ GameObject:
   - component: {fileID: 495754497}
   - component: {fileID: 495754496}
   m_Layer: 0
-  m_Name: Level2Obj
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18975,6 +18993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3812324143514472577, guid: 2ac6fdd9c8cc7d8458cbebdc30368e54, type: 3}
+      propertyPath: m_TagString
+      value: Star
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20677,12 +20699,12 @@ GameObject:
   - component: {fileID: 1264083771}
   - component: {fileID: 1264083770}
   m_Layer: 0
-  m_Name: Level1 Objects
+  m_Name: Level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1264083770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38557,6 +38579,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -38708,6 +38734,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 318824979}
+    - targetCorrespondingSourceObject: {fileID: 1109389848335818948, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 318824986}
   m_SourcePrefab: {fileID: 100100000, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
 --- !u!1001 &1655687238745937625
 PrefabInstance:
