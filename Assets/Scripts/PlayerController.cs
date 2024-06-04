@@ -64,12 +64,12 @@ public class PlayerController : MonoBehaviour
 	public GameObject death_screen;
 	public LevelSystem level_sys;
 
-	private bool onMovingPlatform;
+	private bool onPlatform;
 
     // Start is called before the first frame update
     void Start()
     {
-		onMovingPlatform = false;
+		onPlatform = false;
 		Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
 		UpdateScore();
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
 		{
 			case _state.GROUNDED:
                 rb.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
-                if (!onMovingPlatform && Input.GetKeyDown(KeyCode.Space))
+                if (onPlatform && Input.GetKeyDown(KeyCode.Space))
                 {
                     Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
                     rb.AddForce(jump, ForceMode.Impulse);
@@ -242,8 +242,7 @@ public class PlayerController : MonoBehaviour
 		{
             transform.position = spawnPoint;
             audioSource.PlayOneShot(respawnAudio, 1.0f);
-			this.onMovingPlatform = false;
-			//state = _state.GROUNDED;
+			this.onPlatform = true;
         }
 
         
@@ -278,13 +277,13 @@ public class PlayerController : MonoBehaviour
 		}
 		if (other.gameObject.tag == "MovingPlatform")
 		{
-			onMovingPlatform = true;
+			onPlatform = true;
 			state = _state.GROUNDED;
 			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
 		}
 		if (other.gameObject.tag == "Platform")
 		{
-			onMovingPlatform = true;
+			onPlatform = true;
 			state = _state.GROUNDED;
 			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
 		}
@@ -295,12 +294,12 @@ public class PlayerController : MonoBehaviour
 	{
 		if (other.gameObject.tag == "MovingPlatform")
 		{
-			onMovingPlatform = true;
+			onPlatform = true;
 			state = _state.GROUNDED;
 		}
 		if (other.gameObject.tag == "Platform")
 		{
-			onMovingPlatform = true;
+			onPlatform = true;
 			state = _state.GROUNDED;
 		}
 	}
@@ -317,15 +316,15 @@ public class PlayerController : MonoBehaviour
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
+			onPlatform = true;
             state = _state.GROUNDED;
-			onMovingPlatform = false;
             Debug.Log("grounded moving platform collision: " + other.gameObject.name + $"({Time.frameCount})");
 
         }
         else if (other.gameObject.tag == "Platform")
-		{
+		{	
+			onPlatform = true;
 			state = _state.GROUNDED;
-			onMovingPlatform = false;
 			Debug.Log("grounded  platform collision :"  + other.gameObject.name + $"({Time.frameCount})");
 
         }
@@ -383,7 +382,7 @@ public class PlayerController : MonoBehaviour
 		{
 			// Remove the platform as the parent of the player
 			transform.parent = null;
-			this.onMovingPlatform = false;
+			this.onPlatform = false;
 		}
 	}
 
@@ -393,7 +392,7 @@ public class PlayerController : MonoBehaviour
 		{
 			// Remove the platform as the parent of the player
 			transform.parent = null;
-			this.onMovingPlatform = false;
+			this.onPlatform = false;
 		}
 	}
 
@@ -445,7 +444,7 @@ public class PlayerController : MonoBehaviour
 	{
 		// in the absence of a correct level reload, simply reload this active scene
 		// TODO
-		this.onMovingPlatform = false;
+		this.onPlatform = false;
 		this.powerup_current = 0;
 		this.death_screen.SetActive(true);
 
