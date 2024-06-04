@@ -22,13 +22,15 @@ public class CameraPositionController : MonoBehaviour
     private Quaternion originalRotation;
     private Quaternion newRotation = Quaternion.Euler(10, 180, 0);
     private Vector3 newOffset = new Vector3(0, 1, 3);
-    public CamMode CamState = 0; // my enums hate me and my family, 0 = default 1 = free 2 = backwards
+    public CamMode CamState = CamMode.CAM_DEFAULT; // my enums hate me and my family, 0 = default 1 = free 2 = backwards
 
     public bool isRotated = false; // Add this line to store the rotation state
 
     public TextMeshProUGUI camInfo;
+    public Camera FPSCam;
+    public Camera THIRDCam;
 
-    [SerializeField] Transform CamPos;
+    // [SerializeField] Transform CamPos;
     private Vector3 ThirdPersonPos;
     private float pitch = 0.0f;
     private float yaw = 0.0f;
@@ -38,8 +40,7 @@ public class CameraPositionController : MonoBehaviour
     {
         offset = transform.position - player.transform.position;
         originalRotation = transform.rotation; // Save the original rotation
-        CamState = CamMode.CAM_DEFAULT; // start with default cam
-        ThirdPersonPos = CamPos.position;
+        SetThirdPerson();
     }
 
     // Update is called once per frame
@@ -54,7 +55,7 @@ public class CameraPositionController : MonoBehaviour
                     CamState = CamMode.CAM_FREE;
                     camInfo.text = "Mode: Free";
                     Debug.Log("Changed CamState to CAM_FREE");
-                    transform.position = player.transform.position + offset;
+                    // transform.position = player.transform.position + offset;
                     transform.rotation = originalRotation;
                     break;
                 
@@ -62,7 +63,7 @@ public class CameraPositionController : MonoBehaviour
                     CamState = CamMode.CAM_BACKWARDS;
                     camInfo.text = "Mode: Challenge";
                     Debug.Log("Changed CamState to CAM_BACKWARDS");
-                    transform.position = player.transform.position + newOffset; // Update position relative to player
+                    // transform.position = player.transform.position + newOffset; // Update position relative to player
                     transform.rotation = newRotation;
                     isRotated = true;
                     break;
@@ -72,17 +73,16 @@ public class CameraPositionController : MonoBehaviour
                     camInfo.text = "Mode: First Person";
                     isRotated = false;
                     transform.rotation = originalRotation;
-                    CamPos.position = new Vector3(0,0,0);
                     Debug.Log("Changed CamState to CAM_FIRSTPERSON");
+                    SetFirstPerson();
                     break;
                 
                 case CamMode.CAM_FIRSTPERSON:
                     CamState = CamMode.CAM_DEFAULT;
                     camInfo.text = "Mode: Third Person";
                     Debug.Log("Changed CamState to CAM_DEFAULT");
-                    transform.position = player.transform.position + offset;
                     transform.rotation = originalRotation;
-                    CamPos.position = ThirdPersonPos;
+                    SetThirdPerson();
                     break;
             }
         }
@@ -91,8 +91,8 @@ public class CameraPositionController : MonoBehaviour
         switch (CamState)
         {
             case CamMode.CAM_DEFAULT:
-                transform.position = player.transform.position + offset;
-                transform.rotation = originalRotation;
+                // transform.position = player.transform.position + offset;
+                // transform.rotation = originalRotation;
                 break;
             
             case CamMode.CAM_BACKWARDS:
@@ -112,20 +112,26 @@ public class CameraPositionController : MonoBehaviour
                 break;
             
              case CamMode.CAM_FIRSTPERSON:
-                CamPos.position = new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z + 1);
-                // if(Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
-                // {
-                //     float verticalInput = Input.GetAxis("Mouse Y") * camRotationSpeed * Time.deltaTime;
-                //     float horizontalInput = Input.GetAxis("Mouse X") * camRotationSpeed * Time.deltaTime;
-                //     transform.transform.Rotate(Vector3.right, -verticalInput);
-                //     transform.transform.Rotate(Vector3.up, horizontalInput, Space.World);
-                // }
+                // CamPos.position = new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z + 1);
                 yaw += Input.GetAxis("Mouse X") * camRotationSpeed * Time.deltaTime;
                 pitch += Input.GetAxis("Mouse Y") * camRotationSpeed * Time.deltaTime;
                 pitch = Mathf.Clamp(pitch, camMin, camMax);
                 transform.eulerAngles = new Vector3 (-pitch, yaw, 0.0f);
                 break;
         }
+    }
+
+    void SetFirstPerson()
+    {
+        FPSCam.enabled = true;
+        THIRDCam.enabled = false;
+    }
+
+    
+    void SetThirdPerson()
+    {
+        THIRDCam.enabled = true;
+        FPSCam.enabled = false;
     }
 
 }
