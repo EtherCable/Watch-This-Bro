@@ -112,10 +112,7 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(jump, ForceMode.Impulse);
                     audioSource.PlayOneShot(jumpAudio, 0.4f);
                     state = _state.JUMPING;
-                } else if (onMovingPlatform && Input.GetKeyDown(KeyCode.Space))
-				{
-					state = _state.DOUBLE_JUMP;
-				}
+                }
                 break;
 
 			case _state.JUMPING:
@@ -246,7 +243,7 @@ public class PlayerController : MonoBehaviour
             transform.position = spawnPoint;
             audioSource.PlayOneShot(respawnAudio, 1.0f);
 			this.onMovingPlatform = false;
-			state = _state.GROUNDED;
+			//state = _state.GROUNDED;
         }
 
         
@@ -321,12 +318,14 @@ public class PlayerController : MonoBehaviour
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
             state = _state.GROUNDED;
+			onMovingPlatform = false;
             Debug.Log("grounded moving platform collision: " + other.gameObject.name + $"({Time.frameCount})");
 
         }
         else if (other.gameObject.tag == "Platform")
 		{
 			state = _state.GROUNDED;
+			onMovingPlatform = false;
 			Debug.Log("grounded  platform collision :"  + other.gameObject.name + $"({Time.frameCount})");
 
         }
@@ -354,7 +353,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+	/*
 	void OnCollisionStay(Collision other)
 	{	
 		if(other.gameObject.tag == "MovingPlatform")
@@ -375,6 +374,7 @@ public class PlayerController : MonoBehaviour
 			//transform.position = spawnPoint;
 		//}
 	}
+	*/
 
 
 	void OnTriggerExit(Collider other)
