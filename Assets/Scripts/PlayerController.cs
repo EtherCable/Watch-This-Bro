@@ -246,6 +246,7 @@ public class PlayerController : MonoBehaviour
             transform.position = spawnPoint;
             audioSource.PlayOneShot(respawnAudio, 1.0f);
 			this.onMovingPlatform = false;
+			state = _state.GROUNDED;
         }
 
         
