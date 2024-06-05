@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22091505, g: 0.34413528, b: 0.52712685, a: 1}
+  m_IndirectSpecularColor: {r: 0.7071444, g: 0.77382594, b: 0.8840184, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2286,6 +2286,10 @@ PrefabInstance:
     - target: {fileID: 791126609071756567, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_Name
       value: LevelUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 791126609071756567, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
+      propertyPath: m_TagString
+      value: Star
       objectReference: {fileID: 0}
     - target: {fileID: 1014465117561712320, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6727,12 +6731,12 @@ MonoBehaviour:
   m_margin: {x: -0.4342823, y: 1.6171675, z: 10.95364, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 407754193}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &407754193
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7065,12 +7069,12 @@ MonoBehaviour:
   m_margin: {x: -3.1652288, y: 1.6171675, z: 7.793915, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 416932214}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &416932214
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7686,12 +7690,12 @@ MonoBehaviour:
   m_margin: {x: -4.4241123, y: 1.6171675, z: 9.6782675, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 434616904}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &434616904
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7841,6 +7845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 436282281}
   - component: {fileID: 436282282}
+  - component: {fileID: 436282283}
   m_Layer: 0
   m_Name: CamPivot
   m_TagString: Untagged
@@ -7886,6 +7891,14 @@ MonoBehaviour:
   camInfo: {fileID: 1774349451}
   FPSCam: {fileID: 685985412}
   THIRDCam: {fileID: 1854104655}
+--- !u!81 &436282283
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436282280}
+  m_Enabled: 1
 --- !u!4 &450446716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6957505129690489475, guid: 92d3ee1a617092445ac775ada9043ae0, type: 3}
@@ -11691,7 +11704,6 @@ GameObject:
   m_Component:
   - component: {fileID: 685985410}
   - component: {fileID: 685985412}
-  - component: {fileID: 685985411}
   m_Layer: 0
   m_Name: FPS Camera
   m_TagString: MainCamera
@@ -11714,14 +11726,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 436282281}
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
---- !u!81 &685985411
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685985409}
-  m_Enabled: 1
 --- !u!20 &685985412
 Camera:
   m_ObjectHideFlags: 0
@@ -12796,12 +12800,12 @@ MonoBehaviour:
   m_margin: {x: -3.1652288, y: 1.6171675, z: 7.793915, w: -1.6979227}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 771831038}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &771831038
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18964,12 +18968,12 @@ MonoBehaviour:
   m_margin: {x: -3.1652288, y: 1.6171675, z: 7.793915, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1145181941}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1145181941
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22503,12 +22507,12 @@ MonoBehaviour:
   m_margin: {x: -0.4342823, y: 1.6171675, z: 11.375918, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1304871052}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1304871052
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23058,12 +23062,12 @@ MonoBehaviour:
   m_margin: {x: -0.4342823, y: 1.6171675, z: 10.95364, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1323434614}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1323434614
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28438,12 +28442,12 @@ MonoBehaviour:
   m_margin: {x: -3.1652288, y: 1.6171675, z: 7.793915, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1541742906}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1541742906
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30803,6 +30807,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelUp
       objectReference: {fileID: 0}
+    - target: {fileID: 791126609071756567, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
+      propertyPath: m_TagString
+      value: Star
+      objectReference: {fileID: 0}
     - target: {fileID: 1014465117561712320, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -33154,12 +33162,12 @@ MonoBehaviour:
   m_margin: {x: -3.1652288, y: 1.6171675, z: 7.793915, w: 0.33419085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1791465417}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1791465417
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34169,7 +34177,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1854104656}
   - component: {fileID: 1854104655}
-  - component: {fileID: 1854104654}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -34177,14 +34184,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1854104654
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854104653}
-  m_Enabled: 1
 --- !u!20 &1854104655
 Camera:
   m_ObjectHideFlags: 0
@@ -39089,6 +39088,10 @@ PrefabInstance:
       propertyPath: death_screen
       value: 
       objectReference: {fileID: 1770493252}
+    - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: levelUpAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 91600c93ece192eb88fe803fa37f07ff, type: 3}
     - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: respawnAudio
       value: 

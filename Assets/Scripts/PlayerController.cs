@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 	public AudioClip respawnAudio;
 	public AudioClip jumpAudio;
 	public AudioClip checkpointAudio;
+	public AudioClip levelUpAudio;
 
 	public AudioClip powerup_jump_audio;
 	public AudioClip powerup_lives_audio;
@@ -268,6 +269,10 @@ public class PlayerController : MonoBehaviour
 			spawnPoint = other.transform.position;
 			other.gameObject.SetActive(false);
 			audioSource.PlayOneShot(checkpointAudio, 1.0f);
+		}
+		else if (other.gameObject.tag == "Star")
+		{
+			audioSource.PlayOneShot(levelUpAudio, 1.0f);
 		}
 
 		if (other.gameObject.tag == "RespawnBarrier")
