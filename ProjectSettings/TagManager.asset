@@ -15,8 +15,7 @@ TagManager:
   - TimerColor
   - CreditsColor
   - Star
-  - FinalPlatform1
-  - FinalPlatform2
+  - LivesColor
   layers:
   - Default
   - TransparentFX

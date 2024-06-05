@@ -280,7 +280,7 @@ public class PlayerController : MonoBehaviour
 			// if you hit respawn barrier, spawn at last cp
 			Respawn();
 		}
-		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform" || other.gameObject.tag == "FinalPlatform" || other.gameObject.tag == "FinalPlatform1" || other.gameObject.tag == "FinalPlatform2")
+		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform" || other.gameObject.tag == "FinalPlatform")
 		{
 			onPlatform = true;
 			state = _state.GROUNDED;
@@ -327,26 +327,29 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("grounded  platform collision :"  + other.gameObject.name + $"({Time.frameCount})");
 
         }
-        else if (other.gameObject.tag == "FinalPlatform" || other.gameObject.tag == "FinalPlatform1" || other.gameObject.tag == "FinalPlatform2")
+        else if (other.gameObject.tag == "FinalPlatform")
 		{
 			// upon touching final platform, show complete lv UI
 			// turn off timer, and play win audio
-			
-			if (other.gameObject.tag == "FinalPlatform") {
+			GameObject level0 = GameObject.Find("Level0");
+			GameObject level1 = GameObject.Find("Level1");
+			GameObject level2 = GameObject.Find("Level2");
+			if (level0 != null) {
 				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Tutorial Level\nComplete!";
 				LevelCompleteTextObject.SetActive(true);
 			}
-			else if (other.gameObject.tag == "FinalPlatform1") {
+			else if (level1 != null) {
 				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level 1\nComplete!";
 				LevelCompleteTextObject.SetActive(true);
 			}
-			else if (other.gameObject.tag == "FinalPlatform2") {
+			else if (level2 != null) {
 				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level 2\nComplete!";
 				LevelCompleteTextObject.SetActive(true);
 			}
 			rainbowText.StarColorChange();
 			GameObject.FindWithTag("TimerColor").GetComponent<RainbowText>().StarColorChange();
 			GameObject.FindWithTag("CreditsColor").GetComponent<RainbowText>().StarColorChange();
+			GameObject.FindWithTag("LivesColor").GetComponent<RainbowText>().StarColorChange();
 			timerIsActive = false;
 			audioSource.PlayOneShot(winAudio, 1.0f);
 			state = _state.GROUNDED;

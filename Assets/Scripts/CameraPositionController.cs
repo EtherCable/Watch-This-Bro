@@ -34,6 +34,8 @@ public class CameraPositionController : MonoBehaviour
     private Vector3 ThirdPersonPos;
     private float pitch = 0.0f;
     private float yaw = 0.0f;
+    bool textOn = true;
+    bool escOn = true;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,26 @@ public class CameraPositionController : MonoBehaviour
         offset = transform.position - player.transform.position;
         originalRotation = transform.rotation; // Save the original rotation
         SetThirdPerson();
+        GameObject level0 = GameObject.Find("Level0");
+        if (level0 == null)
+        {
+            GameObject.Find("POVtext").SetActive(false);
+            GameObject.Find("EsctoPause").SetActive(false);
+        }
+    }
+    
+    void Update()
+    {
+       if (Input.GetKeyDown(KeyCode.G) && textOn == true) {
+        GameObject.Find("POVtext").SetActive(false);
+        textOn = false;
+       }
+       if (Input.GetKeyDown(KeyCode.Escape) && escOn == true) {
+        if (GameObject.Find("EsctoPause") != null) {
+            GameObject.Find("EsctoPause").SetActive(false);
+            escOn = false;
+        }
+       }
     }
 
     // Update is called once per frame
@@ -48,44 +70,45 @@ public class CameraPositionController : MonoBehaviour
     {
         // handle changes in state
         if (Input.GetKeyDown(KeyCode.G))
-        {
-            switch (CamState)
             {
-                case CamMode.CAM_DEFAULT: // default
-                    CamState = CamMode.CAM_FREE;
-                    camInfo.text = "Mode: Free";
-                    Debug.Log("Changed CamState to CAM_FREE");
-                    // transform.position = player.transform.position + offset;
-                    transform.rotation = originalRotation;
-                    break;
-                
-                case CamMode.CAM_FREE: // free
-                    CamState = CamMode.CAM_BACKWARDS;
-                    camInfo.text = "Mode: Challenge";
-                    Debug.Log("Changed CamState to CAM_BACKWARDS");
-                    // transform.position = player.transform.position + newOffset; // Update position relative to player
-                    transform.rotation = newRotation;
-                    isRotated = true;
-                    break;
-                
-                case CamMode.CAM_BACKWARDS: // backwards
-                    CamState = CamMode.CAM_FIRSTPERSON;
-                    camInfo.text = "Mode: First Person";
-                    isRotated = false;
-                    transform.rotation = originalRotation;
-                    Debug.Log("Changed CamState to CAM_FIRSTPERSON");
-                    SetFirstPerson();
-                    break;
-                
-                case CamMode.CAM_FIRSTPERSON:
-                    CamState = CamMode.CAM_DEFAULT;
-                    camInfo.text = "Mode: Third Person";
-                    Debug.Log("Changed CamState to CAM_DEFAULT");
-                    transform.rotation = originalRotation;
-                    SetThirdPerson();
-                    break;
+                switch (CamState)
+                {
+                    case CamMode.CAM_DEFAULT: // default
+                        CamState = CamMode.CAM_FREE;
+                        StartCoroutine(ShowMessage("Mode: Free Rotation"));
+                        Debug.Log("Changed CamState to CAM_FREE");
+                        // transform.position = player.transform.position + offset;
+                        transform.rotation = originalRotation;
+                        break;
+                    
+                    case CamMode.CAM_FREE: // free
+                        CamState = CamMode.CAM_BACKWARDS;
+                        StartCoroutine(ShowMessage("Mode: Challenge"));
+                        Debug.Log("Changed CamState to CAM_BACKWARDS");
+                        // transform.position = player.transform.position + newOffset; // Update position relative to player
+                        transform.rotation = newRotation;
+                        isRotated = true;
+                        break;
+                    
+                    case CamMode.CAM_BACKWARDS: // backwards
+                        CamState = CamMode.CAM_FIRSTPERSON;
+                        StartCoroutine(ShowMessage("Mode: First Person"));
+                        isRotated = false;
+                        transform.rotation = originalRotation;
+                        Debug.Log("Changed CamState to CAM_FIRSTPERSON");
+                        SetFirstPerson();
+                        break;
+                    
+                    case CamMode.CAM_FIRSTPERSON:
+                        CamState = CamMode.CAM_DEFAULT;
+                        StartCoroutine(ShowMessage("Mode: Third Person"));
+                        Debug.Log("Changed CamState to CAM_DEFAULT");
+                        transform.rotation = originalRotation;
+                        SetThirdPerson();
+                        break;
             }
         }
+        
 
         // proceed to do camera things depending on which camera state we are in
         switch (CamState)
@@ -134,6 +157,12 @@ public class CameraPositionController : MonoBehaviour
         FPSCam.enabled = false;
     }
 
+    IEnumerator ShowMessage(string message)
+    {
+        camInfo.text = message;
+        yield return new WaitForSeconds(3); // wait for 3 seconds
+        camInfo.text = "";
+    }
 }
 
 
