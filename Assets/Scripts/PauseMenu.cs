@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public Canvas pauseMenuUI; // Assign your Canvas object in the inspector
+    public Canvas pauseMenuUI;
+    public PlayerController player;
 
     void Start ()
     {
@@ -15,7 +16,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && player.lockPausemenu == false)
         {
             if (Time.timeScale == 1)
             {

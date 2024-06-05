@@ -66,10 +66,12 @@ public class PlayerController : MonoBehaviour
 	public LevelSystem level_sys;
 
 	private bool onPlatform;
+	public bool lockPausemenu;
 
     // Start is called before the first frame update
     void Start()
     {
+		lockPausemenu = false;
 		onPlatform = false;
 		Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
@@ -243,7 +245,8 @@ public class PlayerController : MonoBehaviour
 		{
             transform.position = spawnPoint;
             audioSource.PlayOneShot(respawnAudio, 1.0f);
-			this.onPlatform = true;
+			onPlatform = true;
+			state = _state.GROUNDED;
         }
 
         
@@ -289,6 +292,7 @@ public class PlayerController : MonoBehaviour
 
 	}
 
+	/*
 	void OnTriggerStay(Collider other)
 	{
 		if (other.gameObject.tag == "MovingPlatform")
@@ -302,6 +306,7 @@ public class PlayerController : MonoBehaviour
 			state = _state.GROUNDED;
 		}
 	}
+	*/
 
 	void OnCollisionEnter(Collision other)
 	{
@@ -433,19 +438,22 @@ public class PlayerController : MonoBehaviour
 		livesText.color = Color.red;
 	}
 
-    IEnumerator WaitForVideo(GameObject vpobj)
-    {
+	IEnumerator WaitForVideo(GameObject vpobj)
+	{
+		this.lockPausemenu = true;
 		VideoPlayer vp = vpobj.GetComponent<VideoPlayer>();
+		vp.SetDirectAudioVolume(0, 0.1f);
 		//Debug.Log($"({vp.frame})/({vp.frameCount})");
-        while (vp.frame != ((long)vp.frameCount)-1)
-        {
-            yield return null;
-        }
+		while (vp.frame != ((long)vp.frameCount)-1)
+		{
+			yield return null;
+		}
 		Debug.Log("done");
 		vpobj.SetActive(false);
 		//Time.timeScale = 1f;
 		this.level_sys.LoadLevel();
 		Time.timeScale = 1f;
+		this.lockPausemenu = false;
 	}
 
 	void Die()
@@ -455,6 +463,7 @@ public class PlayerController : MonoBehaviour
 		this.onPlatform = false;
 		this.powerup_current = 0;
 		this.death_screen.SetActive(true);
+
 
 		StartCoroutine(WaitForVideo(this.death_screen));
 		//this.transform.position.Set(this.transform.position.x, this.transform.position.y + 1000,this.transform.position.z);

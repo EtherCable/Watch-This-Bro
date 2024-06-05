@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21995561, g: 0.3434698, b: 0.5266137, a: 1}
+  m_IndirectSpecularColor: {r: 0.22022165, g: 0.3435791, b: 0.5266945, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2458,11 +2458,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 791126609071756567, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_Name
-      value: LevelUp
+      value: FinalStar
       objectReference: {fileID: 0}
     - target: {fileID: 791126609071756567, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_TagString
-      value: Star
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1014465117561712320, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2470,7 +2470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1014465117561712320, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.52
+      value: 105.5
       objectReference: {fileID: 0}
     - target: {fileID: 1014465117561712320, guid: 6f4162f17878d3046b19cb5e8ec6bf33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5264,6 +5264,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1.2
+--- !u!114 &318824995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+  m_PrefabInstance: {fileID: 1409355436466378854}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318824956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e528831e1418c18aa9bcdda5d6c0dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &339345183
 Mesh:
   m_ObjectHideFlags: 0
@@ -6562,7 +6573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &387950296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23075,6 +23086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1323343981}
+  player: {fileID: 318824995}
 --- !u!114 &1323343979
 MonoBehaviour:
   m_ObjectHideFlags: 0
