@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 	public AudioClip jumpAudio;
 	public AudioClip checkpointAudio;
 	public AudioClip levelUpAudio;
+	public AudioClip tobcontinuedAudio;
 
 	public AudioClip powerup_jump_audio;
 	public AudioClip powerup_lives_audio;
@@ -452,6 +453,39 @@ public class PlayerController : MonoBehaviour
 		this.lockPausemenu = false;
 	}
 
+	void EnableChildren(bool isEnabled)
+    {
+		GameObject tobecontinuedMenuUI = GameObject.Find("ToBeContinued");
+        foreach (Transform child in tobecontinuedMenuUI.transform)
+        {
+            child.gameObject.SetActive(isEnabled);
+        }
+    }
+
+
+	public IEnumerator WaitForSound()
+	{
+		if (GameObject.Find("EsctoPause") != null) {
+            GameObject.Find("EsctoPause").SetActive(false);
+        }
+		if (GameObject.Find("POVtext") != null) {
+            GameObject.Find("POVtext").SetActive(false);
+        }
+		this.lockPausemenu = true;
+		EnableChildren(true);
+		GameObject.Find("ToBeContinuedImage").SetActive(false);
+		Time.timeScale = 0f;
+		audioSource.PlayOneShot(tobcontinuedAudio, 1.0f);
+		yield return new WaitForSecondsRealtime(4); // Wait for 4 seconds
+		EnableChildren(true);
+		float clipLength = tobcontinuedAudio.length;
+		yield return new WaitForSecondsRealtime(clipLength - 3); // Subtract the 3 seconds already waited
+		Time.timeScale = 1f;
+		this.level_sys.LoadLevel();
+		this.lockPausemenu = false;
+	}
+
+
 	void Die()
 	{
 		// in the absence of a correct level reload, simply reload this active scene
@@ -459,13 +493,10 @@ public class PlayerController : MonoBehaviour
 		onPlatform = false;
 		this.powerup_current = 0;
 		//this.death_screen.SetActive(true);
-		this.level_sys.LoadLevel();
-		Time.timeScale = 1f;
-
+		StartCoroutine(WaitForSound());
 		//Not suported in WebGL
 		//StartCoroutine(WaitForVideo(this.death_screen));
 		//this.transform.position.Set(this.transform.position.x, this.transform.position.y + 1000,this.transform.position.z);
-		//Time.timeScale = 0f;
 	}
 	
 }
