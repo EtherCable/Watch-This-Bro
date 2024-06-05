@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
 		{
 			case _state.GROUNDED:
                 rb.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
-                if (onPlatform && Input.GetKeyDown(KeyCode.Space))
+                if (onPlatform == true && Input.GetKeyDown(KeyCode.Space))
                 {
                     Vector3 jump = new Vector3(0.0f, jumpForce, 0.0f);
                     rb.AddForce(jump, ForceMode.Impulse);
@@ -129,7 +129,6 @@ public class PlayerController : MonoBehaviour
 				break;
 
 			case _state.DOUBLE_JUMP:
-				// dont do anything here, just wait to land
 				break;
 		}
 
@@ -285,8 +284,8 @@ public class PlayerController : MonoBehaviour
 		}
 		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform" || other.gameObject.tag == "FinalPlatform")
 		{
-			onPlatform = true;
-			state = _state.GROUNDED;
+			onPlatform = false;
+			//state = _state.GROUNDED;
 			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
 		}
 
@@ -317,6 +316,8 @@ public class PlayerController : MonoBehaviour
 			// on contact with spike, remove life, send back to last
 			// spawn point, and play sound.
 			Respawn();
+			onPlatform = true;
+			state = _state.GROUNDED;
 		}
 		else if (other.gameObject.tag == "MovingPlatform")
 		{
@@ -365,37 +366,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-	/*
-	void OnCollisionStay(Collision other)
-	{	
-		if(other.gameObject.tag == "MovingPlatform")
-		{
-			Debug.Log("grounded moving platform trigger: " + other.gameObject.name + $"({Time.frameCount})");
-			// Make the platform the parent of the player
-			//transform.parent = other.gameObject.transform;
-			// Calculate the player's position relative to the platform
-			//relativePosition = transform.position - other.gameObject.transform.position;
-			state = _state.GROUNDED;
-		}
-		// Assuming the player has a Rigidbody component
-		Rigidbody playerRigidbody = GetComponent<Rigidbody>();
-
-		//if (transform.position.y <= other.transform.position.y)
-		//{
-			// Player is not on top of the platform, send him back to spawn
-			//transform.position = spawnPoint;
-		//}
-	}
-	*/
-
 
 	void OnTriggerExit(Collider other)
 	{
-		if(other.gameObject.tag == "MovingPlatform")
-		{
-			// Remove the platform as the parent of the player
-			transform.parent = null;
-			this.onPlatform = false;
+		if (other.gameObject.tag == "Spikes") {
+			onPlatform = true;
+			state = _state.GROUNDED;
 		}
 	}
 
@@ -405,7 +381,7 @@ public class PlayerController : MonoBehaviour
 		{
 			// Remove the platform as the parent of the player
 			transform.parent = null;
-			this.onPlatform = false;
+			onPlatform = true;
 		}
 	}
 
@@ -460,7 +436,7 @@ public class PlayerController : MonoBehaviour
 	{
 		// in the absence of a correct level reload, simply reload this active scene
 		// TODO
-		this.onPlatform = false;
+		onPlatform = false;
 		this.powerup_current = 0;
 		this.death_screen.SetActive(true);
 
