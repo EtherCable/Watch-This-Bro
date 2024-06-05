@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
 	private bool onPlatform;
 	public bool lockPausemenu;
+	public bool reachedfinalplatform = false;
 
     // Start is called before the first frame update
     void Start()
@@ -235,10 +236,20 @@ public class PlayerController : MonoBehaviour
         if(powerup_current != 3)
 			lives--;
 
-        UpdateLives();
-        if (lives == 0)
+		if (!reachedfinalplatform) {
+        	UpdateLives();
+		}
+        if (lives == 0 && !reachedfinalplatform)
 		{
 			Die();
+		}
+		else if (reachedfinalplatform)
+		{
+			lives = 5;
+			transform.position = spawnPoint;
+            audioSource.PlayOneShot(respawnAudio, 1.0f);
+			onPlatform = true;
+			state = _state.GROUNDED;
 		}
 		else
 		{
@@ -282,11 +293,17 @@ public class PlayerController : MonoBehaviour
 			// if you hit respawn barrier, spawn at last cp
 			Respawn();
 		}
-		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform" || other.gameObject.tag == "FinalPlatform")
+		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform")
 		{
 			onPlatform = false;
 			//state = _state.GROUNDED;
 			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
+		}
+		if (other.gameObject.tag == "FinalPlatform")
+		{
+			// set new spawn to cp and then remove cp cone
+			spawnPoint = other.transform.position;
+			reachedfinalplatform = true;
 		}
 
 	}
@@ -398,7 +415,10 @@ public class PlayerController : MonoBehaviour
 		{
 			l = 9001;
 		}
-
+		if (reachedfinalplatform)
+		{
+			livesText.text = "♥♥♥♥♥";
+		}
 		if (l == 9001)
 		{
 			livesText.text = l.ToString() + "♥";
