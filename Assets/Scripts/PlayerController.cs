@@ -458,12 +458,14 @@ public class PlayerController : MonoBehaviour
 		// TODO
 		onPlatform = false;
 		this.powerup_current = 0;
-		this.death_screen.SetActive(true);
+		//this.death_screen.SetActive(true);
+		this.level_sys.LoadLevel();
+		Time.timeScale = 1f;
 
-
-		StartCoroutine(WaitForVideo(this.death_screen));
+		//Not suported in WebGL
+		//StartCoroutine(WaitForVideo(this.death_screen));
 		//this.transform.position.Set(this.transform.position.x, this.transform.position.y + 1000,this.transform.position.z);
-		Time.timeScale = 0f;
+		//Time.timeScale = 0f;
 	}
 	
 }
