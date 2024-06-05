@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22009669, g: 0.34344277, b: 0.5266345, a: 1}
+  m_IndirectSpecularColor: {r: 0.22012034, g: 0.34355897, b: 0.5265506, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -53804,7 +53804,7 @@ GameObject:
   - component: {fileID: 2083713463}
   - component: {fileID: 2083713462}
   m_Layer: 5
-  m_Name: ToBeContinued
+  m_Name: ToBeContinuedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55679,6 +55679,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
+      propertyPath: gta
+      value: 
+      objectReference: {fileID: 8300000, guid: 753001dd241c1aa4f8ada9b3e54822da, type: 3}
     - target: {fileID: 3251935117156149176, guid: d240536d06b7d2cbe98a0d54f83868e7, type: 3}
       propertyPath: lives
       value: 5

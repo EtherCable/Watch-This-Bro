@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 	public AudioClip powerup_lives_audio;
 	public AudioClip powerup_timeslow_audio;
 
+	public AudioClip gta;
+
 	private float movementX;
 	private float movementY;
 
@@ -107,6 +109,12 @@ public class PlayerController : MonoBehaviour
 
 
 	void Update() {
+		//play gta theme in a loop
+		if (!audioSource.isPlaying)
+		{
+			audioSource.PlayOneShot(gta, 0.1f);
+		}
+
 		switch (state)
 		{
 			case _state.GROUNDED:
