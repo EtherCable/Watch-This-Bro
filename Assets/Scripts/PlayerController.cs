@@ -333,16 +333,22 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("grounded  platform collision :"  + other.gameObject.name + $"({Time.frameCount})");
 
         }
-        else if (other.gameObject.tag == "FinalPlatform")
+        else if (other.gameObject.tag == "FinalPlatform" || other.gameObject.tag == "FinalPlatform1" || other.gameObject.tag == "FinalPlatform2")
 		{
 			// upon touching final platform, show complete lv UI
 			// turn off timer, and play win audio
-			LevelCompleteTextObject.SetActive(true);
-			if (level_sys.current_level == 0) {
+			
+			if (other.gameObject.tag == "FinalPlatform") {
 				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Tutorial Level\nComplete!";
+				LevelCompleteTextObject.SetActive(true);
 			}
-			else {
-				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level " + level_sys.current_level + "\nComplete!";
+			else if (other.gameObject.tag == "FinalPlatform1") {
+				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level 1\nComplete!";
+				LevelCompleteTextObject.SetActive(true);
+			}
+			else if (other.gameObject.tag == "FinalPlatform2") {
+				LevelCompleteTextObject.GetComponent<TextMeshProUGUI>().text = "Level 2\nComplete!";
+				LevelCompleteTextObject.SetActive(true);
 			}
 			rainbowText.StarColorChange();
 			GameObject.FindWithTag("TimerColor").GetComponent<RainbowText>().StarColorChange();
