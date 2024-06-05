@@ -479,6 +479,7 @@ public class PlayerController : MonoBehaviour
 		if (GameObject.Find("POVtext") != null) {
             GameObject.Find("POVtext").SetActive(false);
         }
+		audioSource.Stop();
 		this.lockPausemenu = true;
 		EnableChildren(true);
 		GameObject.Find("ToBeContinuedImage").SetActive(false);
