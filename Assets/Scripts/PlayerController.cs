@@ -280,13 +280,7 @@ public class PlayerController : MonoBehaviour
 			// if you hit respawn barrier, spawn at last cp
 			Respawn();
 		}
-		if (other.gameObject.tag == "MovingPlatform")
-		{
-			onPlatform = true;
-			state = _state.GROUNDED;
-			GetComponent<Rigidbody>().AddForce(Vector3.down * 10f, ForceMode.VelocityChange);
-		}
-		if (other.gameObject.tag == "Platform")
+		if (other.gameObject.tag == "MovingPlatform" || other.gameObject.tag == "Platform" || other.gameObject.tag == "FinalPlatform" || other.gameObject.tag == "FinalPlatform1" || other.gameObject.tag == "FinalPlatform2")
 		{
 			onPlatform = true;
 			state = _state.GROUNDED;

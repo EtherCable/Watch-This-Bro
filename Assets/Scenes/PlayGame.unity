@@ -6376,7 +6376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &387950296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8543,7 +8543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &495754496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9418,7 +9418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118679438543206585, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2206162087979027840, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_AdditionalVertexStreams
@@ -9514,6 +9514,7 @@ PrefabInstance:
     - {fileID: 5596091605171873489, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 7963627614783293327, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 2388091942687407376, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
+    - {fileID: 8643635474254964655, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -13881,6 +13882,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2116535944}
+    - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1248576195599950318, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -15844,7 +15849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118679438543206585, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2206162087979027840, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_AdditionalVertexStreams
@@ -15936,6 +15941,7 @@ PrefabInstance:
     - {fileID: 5596091605171873489, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 7963627614783293327, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 2388091942687407376, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
+    - {fileID: 8643635474254964655, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -16232,7 +16238,11 @@ PrefabInstance:
       objectReference: {fileID: 521628446}
     - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1248576195599950318, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Mesh
@@ -16368,6 +16378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7121972561492498694, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+    - {fileID: 1061185704625253365, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -16957,7 +16968,11 @@ PrefabInstance:
       objectReference: {fileID: 339345183}
     - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1248576195599950318, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Mesh
@@ -17097,6 +17112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7121972561492498694, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+    - {fileID: 1061185704625253365, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -18767,6 +18783,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingWalls2
       objectReference: {fileID: 0}
+    - target: {fileID: 2118679438543206585, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2206162087979027840, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_AdditionalVertexStreams
       value: 
@@ -20011,7 +20031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118679438543206585, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2206162087979027840, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_AdditionalVertexStreams
@@ -20103,6 +20123,7 @@ PrefabInstance:
     - {fileID: 5596091605171873489, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 7963627614783293327, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 2388091942687407376, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
+    - {fileID: 8643635474254964655, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -23484,7 +23505,11 @@ PrefabInstance:
       objectReference: {fileID: 1524861579}
     - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1248576195599950318, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Mesh
@@ -23624,6 +23649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7121972561492498694, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+    - {fileID: 1061185704625253365, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -25528,7 +25554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118679438543206585, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2206162087979027840, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_AdditionalVertexStreams
@@ -25624,6 +25650,7 @@ PrefabInstance:
     - {fileID: 5596091605171873489, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 7963627614783293327, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 2388091942687407376, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
+    - {fileID: 8643635474254964655, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -26098,7 +26125,11 @@ PrefabInstance:
       objectReference: {fileID: 454246543}
     - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1248576195599950318, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Mesh
@@ -26234,6 +26265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7121972561492498694, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+    - {fileID: 1061185704625253365, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -28852,7 +28884,11 @@ PrefabInstance:
       objectReference: {fileID: 598430813}
     - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 953220250952466497, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1248576195599950318, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
       propertyPath: m_Mesh
@@ -28988,6 +29024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7121972561492498694, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
+    - {fileID: 1061185704625253365, guid: f7cc636688db13945bf4005acfa0c6d4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -31665,7 +31702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118679438543206585, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2206162087979027840, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
       propertyPath: m_AdditionalVertexStreams
@@ -31757,6 +31794,7 @@ PrefabInstance:
     - {fileID: 5596091605171873489, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 7963627614783293327, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     - {fileID: 2388091942687407376, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
+    - {fileID: 8643635474254964655, guid: 9bc2114bf8e95b0458c6386872e79d00, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
