@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 		//play gta theme in a loop
 		if (!audioSource.isPlaying)
 		{
-			audioSource.PlayOneShot(gta, 0.5f);
+			audioSource.PlayOneShot(gta, 0.8f);
 		}
 
 		switch (state)
