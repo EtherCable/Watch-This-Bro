@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class DistanceCheck : MonoBehaviour
 {
     public float maxDistance = 45f;
-    public LevelSystem level_sys;
     private string curr_level_str;
     private List<string> tags = new List<string> { "Platform", "MovingPlatform", "Spike" };
 
@@ -13,13 +12,16 @@ public class DistanceCheck : MonoBehaviour
 
     void Start()
     {
-        if (level_sys.current_level == 0) {
+        GameObject level0 = GameObject.Find("Level0");
+		GameObject level1 = GameObject.Find("Level1");
+		GameObject level2 = GameObject.Find("Level2");
+        if (level0 != null) {
             curr_level_str = "Level0";
         }
-        else if (level_sys.current_level == 1) {
+        else if (level1 != null) {
             curr_level_str = "Level1";
         }
-        else if (level_sys.current_level == 2) {
+        else if (level2 != null) {
             curr_level_str = "Level2";
         }
 

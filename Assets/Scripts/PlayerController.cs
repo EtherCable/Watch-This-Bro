@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 		//play gta theme in a loop
 		if (!audioSource.isPlaying)
 		{
-			audioSource.PlayOneShot(gta, 0.1f);
+			audioSource.PlayOneShot(gta, 0.5f);
 		}
 
 		switch (state)
@@ -169,6 +169,7 @@ public class PlayerController : MonoBehaviour
 						audioSource.PlayOneShot(this.powerup_jump_audio);
 						break;
 					case 2:
+						this.lockPausemenu = true;
 						Time.timeScale = this.powerup_time_slow;
                         //time_mult = (1+ (1-this.powerup_time_slow));
                         audioSource.PlayOneShot(this.powerup_timeslow_audio);
@@ -177,10 +178,6 @@ public class PlayerController : MonoBehaviour
                         UpdateLives();
                         audioSource.PlayOneShot(this.powerup_lives_audio);
                         break;
-
-
-
-
                 }
                 powerup_applied = true;
 			}
@@ -195,6 +192,10 @@ public class PlayerController : MonoBehaviour
 						
 						break;
 					case 2:
+						if (this.lockPausemenu == true)
+						{
+							this.lockPausemenu = false;
+						}
                         Time.timeScale = 1f;
 
                         break;
